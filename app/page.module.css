@@ -33,7 +33,6 @@
   left: 0;
   right: 0;
   margin: auto;
-
   width: fit-content;
   height: 70px;
   min-height: fit-content;
@@ -44,6 +43,13 @@
   z-index: 1000;
   border-radius: 25px;
   padding-right: 10px;
+  backdrop-filter: blur(5px);
+  opacity: 1;
+  @media (max-width: 768px) {
+    display: none;
+  }
+  animation: fadeIn 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .navbarTop {
@@ -52,7 +58,6 @@
   left: 0;
   right: 0;
   margin: auto;
-
   width: fit-content;
   height: 70px;
   min-height: fit-content;
@@ -63,6 +68,14 @@
   z-index: 1000;
   border-radius: 25px;
   padding-right: 10px;
+  backdrop-filter: blur(5px);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  animation: fadeIn 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .navBtn {
@@ -89,10 +102,14 @@
   border-radius: 15px;
   cursor: pointer;
   padding: 0px 10px;
+  transition: all 0.3s ease-in-out;
 }
 
 .hidden {
-  display: none;
+  width: 0px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease-in-out;
 }
 
 .icon {
@@ -104,11 +121,48 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  height: 50px;
+  height: 40px;
   background-color: var(--lightgrey);
-  padding: 10px;
+  padding: 8px;
   border-radius: 15px;
   margin: 20px;
   opacity: 0.8;
   cursor: pointer;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0%;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 100%;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0%;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 100%;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes opacityIn {
+  from {
+    opacity: 0%;
+  }
+
+  to {
+    opacity: 100%;
+  }
 }
