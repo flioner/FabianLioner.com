@@ -50,7 +50,9 @@ export default function Home() {
           onStop={(e, data) => setPosition({ x: data.x, y: data.y })} // Update position on drag stop
         >
           <div
-            className={showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hidden}
+            className={
+              showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hiddenNav
+            }
           >
             <div className={s.navBtn}> About me</div>
             <div className={s.navBtn}> Projects</div>
