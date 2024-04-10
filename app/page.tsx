@@ -91,12 +91,12 @@ export default function Home() {
         </Draggable>
         <img
           onClick={() => setShowNavbar(true)}
-          className={showNavbar ? s.hidden : s.show}
+          className={showNavbar ? s.hidden : `${s.cornerBtn} ${s.show}`}
           src="icons/show.png"
         />
         <img
           onClick={() => console.log("navbar menu")}
-          className={s.menu}
+          className={`${s.cornerBtn} ${s.menu}`}
           src="icons/menu.png"
         />
       </div>
