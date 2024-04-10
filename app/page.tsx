@@ -8,10 +8,16 @@ export default function Home() {
   const [showSettings, setShowSettings] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [isPinned, setIsPinned] = useState(true);
-  const [position, setPosition] = useState({ x: 0, y: 0 }); // State to track position
+  const [isTop, setIsTop] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleCenterButtonClick = () => {
-    setPosition({ x: 0, y: 0 }); // Set position to center
+  const handleCenterButtonClick = ({ selection }: { selection: string }) => {
+    if (selection == "top") {
+      setIsTop(true);
+    } else {
+      setIsTop(false);
+    }
+    setPosition({ x: 0, y: 0 }); // Set position to top
   };
 
   return (
@@ -40,7 +46,9 @@ export default function Home() {
         position={position} // Set position dynamically
         onStop={(e, data) => setPosition({ x: data.x, y: data.y })} // Update position on drag stop
       >
-        <div className={showNavbar ? s.navbar : s.hidden}>
+        <div
+          className={showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hidden}
+        >
           <div className={s.navBtn}> About me</div>
           <div className={s.navBtn}> Projects</div>
           <div className={s.navBtn}> Experience</div>
@@ -57,10 +65,16 @@ export default function Home() {
               {isPinned ? "Unpin" : "Pin"}
             </div>
             <div
-              onClick={handleCenterButtonClick} // Call handleCenterButtonClick on click
+              onClick={() => handleCenterButtonClick({ selection: "top" })} // Call handleCenterButtonClick on click
               className={showSettings ? s.navBtn2 : s.hidden}
             >
-              Center
+              Top
+            </div>
+            <div
+              onClick={() => handleCenterButtonClick({ selection: "bottom" })} // Call handleCenterButtonClick on click
+              className={showSettings ? s.navBtn2 : s.hidden}
+            >
+              Bottom
             </div>
             <div className={showSettings ? s.navBtn2 : s.hidden}>
               <img

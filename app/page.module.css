@@ -45,6 +45,25 @@
   padding-right: 10px;
 }
 
+.navbarTop {
+  position: fixed;
+  top: 30px;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  width: fit-content;
+  height: 70px;
+  min-height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--lightgrey);
+  z-index: 1000;
+  border-radius: 20px;
+  padding-right: 10px;
+}
+
 .navBtn {
   height: calc(100% - 25px);
   margin: 10px 0px 10px 10px;
