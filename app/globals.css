@@ -5,6 +5,8 @@
 @tailwind utilities;
 
 :root {
+  body {
+  }
 }
 
 @media (prefers-color-scheme: dark) {
