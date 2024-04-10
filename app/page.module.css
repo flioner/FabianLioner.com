@@ -1,3 +1,15 @@
+.landing {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: -2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: var(--M);
+}
+
 .bg {
   position: absolute;
   top: 0;
@@ -12,5 +24,69 @@
   font-weight: bold;
   color: black;
   text-align: center;
-  margin-top: 40%;
+}
+
+.navbar {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  width: fit-content;
+  height: 70px;
+  min-height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--lightgrey);
+  z-index: 1000;
+  border-radius: 20px;
+  padding-right: 10px;
+}
+
+.navBtn {
+  height: calc(100% - 25px);
+  margin: 10px 0px 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  color: var(--black);
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 0px 10px;
+}
+
+.navBtn2 {
+  height: calc(100% - 25px);
+  margin: 10px 0px 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white);
+  color: var(--black);
+  border-radius: 15px;
+  cursor: pointer;
+  padding: 0px 10px;
+}
+
+.hidden {
+  display: none;
+}
+.icon {
+  height: 40px;
+  padding: 7px 0px;
+}
+
+.show {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 50px;
+  background-color: var(--lightgrey);
+  padding: 10px;
+  border-radius: 15px;
+  margin: 20px;
+  opacity: 0.8;
 }
