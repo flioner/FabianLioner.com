@@ -46,6 +46,12 @@
   backdrop-filter: blur(5px);
   opacity: 1;
   @media (max-width: 700px) {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
     display: none;
   }
   animation: fadeIn 0.4s ease-in-out;
@@ -71,6 +77,12 @@
   backdrop-filter: blur(5px);
 
   @media (max-width: 700px) {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
     display: none;
   }
 
