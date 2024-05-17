@@ -4,6 +4,7 @@ import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
 import Draggable from "react-draggable";
 import { useState } from "react";
+import Projects from "./components/threejs/projects/projects";
 export default function Home() {
   /* Beginning of Navbar Logic */
   const [showSettings, setShowSettings] = useState(false);
@@ -24,25 +25,6 @@ export default function Home() {
 
   return (
     <main>
-      <div className={s.landing}>
-        <div className={s.bg}>
-          <MetaballsPage />
-        </div>
-        <div className={s.name}> Fabián Lióner</div>
-
-        <Typewriter
-          options={{
-            strings: [
-              "Front-End Development",
-              "Web Design",
-              "Full-Stack Development",
-            ],
-            autoStart: true,
-            loop: true,
-          }}
-        />
-      </div>
-
       <div /* NAVBAR */>
         <Draggable
           disabled={isPinned}
@@ -57,50 +39,27 @@ export default function Home() {
             <div className={s.navBtn}> About me</div>
             <div className={s.navBtn}> Projects</div>
             <div className={s.navBtn}> Experience</div>
-            <div className={s.navBtn}>
-              <img
-                className={s.icon}
-                onClick={() => setShowSettings(!showSettings)}
-                src="icons/settings.png"
-              />
-              <div
-                onClick={() => setIsPinned(!isPinned)}
-                className={showSettings ? s.navBtn2 : s.hidden}
-              >
-                {isPinned ? "Unpin" : "Pin"}
-              </div>
-              <div
-                onClick={() => handleCenterButtonClick({ selection: "top" })} // Call handleCenterButtonClick on click
-                className={showSettings ? s.navBtn2 : s.hidden}
-              >
-                Top
-              </div>
-              <div
-                onClick={() => handleCenterButtonClick({ selection: "bottom" })} // Call handleCenterButtonClick on click
-                className={showSettings ? s.navBtn2 : s.hidden}
-              >
-                Bottom
-              </div>
-              <div className={showSettings ? s.navBtn2 : s.hidden}>
-                <img
-                  className={s.icon}
-                  onClick={() => setShowNavbar(false)}
-                  src="icons/hide.png"
-                />
-              </div>
-            </div>
           </div>
         </Draggable>
-        <img
-          onClick={() => setShowNavbar(true)}
-          className={showNavbar ? s.hidden : `${s.cornerBtn} ${s.show}`}
-          src="icons/show.png"
+      </div>
+
+      <div /* Landing Page */ className={s.landing}>
+        <div className={s.name}> Fabián Lióner</div>
+        <Typewriter
+          options={{
+            strings: [
+              "Front-End Development",
+              "Web Design",
+              "Full-Stack Development",
+            ],
+            autoStart: true,
+            loop: true,
+          }}
         />
-        <img
-          onClick={() => console.log("navbar menu")}
-          className={`${s.cornerBtn} ${s.menu}`}
-          src="icons/menu.png"
-        />
+      </div>
+
+      <div className={s.projectSection}>
+        <Projects />
       </div>
     </main>
   );

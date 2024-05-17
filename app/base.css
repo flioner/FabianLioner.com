@@ -38,6 +38,7 @@
   --MG: max(min(1.9vw, 1.7rem), 0.85rem);
   --M: max(min(1.9vw, 1.5rem), 0.85rem);
   --S: max(min(1.7vw, 1.2rem), 0.8rem);
+  --SX: max(min(1.3vw, 1.1rem), 0.77rem);
   --XS: max(min(1vw, 1rem), 0.75rem);
   --XXS: max(min(1vw, 1rem), 0.7rem);
 
