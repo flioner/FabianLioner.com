@@ -49,8 +49,8 @@ export default function Projects() {
   ];
   return (
     <main>
-      {projects.map((project) => (
-        <div className={`${s.projectCont} ${s.mobile}`}>
+      {projects.map((project, index) => (
+        <div key={index} className={`${s.projectCont} ${s.mobile}`}>
           <div className={s.project}>
             <h2 className={s.title}>{project.name}</h2>
             <p className={s.desc}>{project.description}</p>
