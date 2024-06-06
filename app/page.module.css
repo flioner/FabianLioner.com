@@ -19,6 +19,15 @@
   z-index: -1;
 }
 
+.bgImg {
+  position: absolute;
+  opacity: 80%;
+  height: auto;
+  max-height: 100%;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
 .name {
   font-size: max(min(10vw, 7rem), 4rem);
   font-weight: bold;

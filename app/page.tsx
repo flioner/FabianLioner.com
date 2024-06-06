@@ -4,7 +4,8 @@ import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
 import Draggable from "react-draggable";
 import { useState } from "react";
-import Projects from "./components/threejs/projects/projects";
+import Projects from "./components/projects/projects";
+import AboutMe from "./components/aboutme/aboutme";
 export default function Home() {
   /* Beginning of Navbar Logic */
   const [showSettings, setShowSettings] = useState(false);
@@ -44,7 +45,8 @@ export default function Home() {
       </div>
 
       <div /* Landing Page */ className={s.landing}>
-        <div className={s.name}> Fabián Lióner</div>
+        <div className={s.name}> Fabian Lioner</div>
+
         <Typewriter
           options={{
             strings: [
@@ -59,8 +61,10 @@ export default function Home() {
       </div>
 
       <div className={s.projectSection}>
-        <Projects />
+        <AboutMe />
       </div>
     </main>
   );
 }
+
+// <Projects />

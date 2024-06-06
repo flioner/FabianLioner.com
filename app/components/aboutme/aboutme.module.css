@@ -1,0 +1,12 @@
+.mainBody {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.test {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  top: -50px;
+}
