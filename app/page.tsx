@@ -7,6 +7,7 @@ import { useState } from "react";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Blob from "./components/threejs/grainybg";
+import ColorBlob from "./components/threejs/grainybgcolor";
 
 export default function Home() {
   /* Beginning of Navbar Logic */
@@ -60,8 +61,8 @@ export default function Home() {
             loop: true,
           }}
         />
-        <div className={s.bgBlob}>
-          <Blob />
+        <div className={s.bgBlobColor}>
+          <ColorBlob />
         </div>
       </div>
 

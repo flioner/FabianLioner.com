@@ -18,7 +18,7 @@ const MetaballsPage = () => {
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(12, 1, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(15, 1, 0.1, 1000);
     camera.position.z = 10;
     camera.position.y = -0.4;
     cameraRef.current = camera;
@@ -40,7 +40,7 @@ const MetaballsPage = () => {
     light2.castShadow = true;
     scene.add(light2);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff);
+    const ambientLight = new THREE.AmbientLight(0x000000);
     scene.add(ambientLight);
 
     const vertexShader = `
@@ -56,14 +56,14 @@ const MetaballsPage = () => {
     const fragmentShader = `
     varying vec3 vNormal;
     varying vec3 vPosition;
-  
+    
     // Simplex noise function for 3D noise
     float hash(vec3 p) {
       p = fract(p * 0.3183099 + vec3(0.1, 0.1, 0.1));
       p *= 17.0;
       return fract(p.x * p.y * p.z * (p.x + p.y + p.z));
     }
-  
+    
     float noise(vec3 p) {
       vec3 i = floor(p);
       vec3 f = fract(p);
@@ -77,25 +77,53 @@ const MetaballsPage = () => {
                      mix(hash(i + vec3(0.0, 1.0, 1.0)), 
                           hash(i + vec3(1.0, 1.0, 1.0)), f.x), f.y), f.z);
     }
-  
+    
     float random(vec2 st) {
       return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
     }
-  
+    
+    // Smooth gradient function
+    vec3 colorGradient(float t) {
+      vec3 color;
+      if (t < 0.25) {
+        color = mix(vec3(1.0, 0.0, 1.0), vec3(0.0, 0.0, 1.0), t * 4.0);
+      } else if (t < 0.5) {
+        color = mix(vec3(0.0, 0.0, 1.0), vec3(0.0, 1.0, 1.0), (t - 0.25) * 4.0);
+      } else if (t < 0.75) {
+        color = mix(vec3(0.0, 1.0, 1.0), vec3(0.0, 1.0, 0.0), (t - 0.5) * 4.0);
+      } else {
+        color = mix(vec3(0.0, 1.0, 0.0), vec3(1.0, 1.0, 0.0), (t - 0.75) * 4.0);
+      }
+      return color;
+    }
+    
     void main() {
       float intensity = dot(vNormal, vec3(0.0, 0.0, 1.0));
-  
+      
       // High-resolution 3D noise based on world position
-      float noise3D = noise(vPosition * 2000.0);  // Increase frequency for finer detail
-  
+      float noise3D = noise(vPosition * 2000.0); // Increase frequency for finer detail
+      
       // High-resolution 2D noise based on screen position
       float noise2D = random(gl_FragCoord.xy * 0.1);
-  
+      
       // Blend 50% 3D noise with 50% 2D noise
       float grain = mix(noise3D, noise2D, 0.5);
       grain = mix(grain, 0.0, intensity);
       
-      gl_FragColor = vec4(vec3(grain), 1.0);
+      // Compute a radial gradient based on distance from the center
+      float radius = length(vPosition);
+      float gradient = smoothstep(0.5, 1.5, radius); // Adjust values for the gradient range
+      
+      // Apply the gradient color
+      vec3 baseColor = colorGradient(gradient);
+      
+      // Integrate noise effect into the color
+      vec3 color = mix(baseColor, vec3(grain), 0.5); // Blend base color with noise effect
+      
+      // Apply intensity to color
+      color = mix(color, vec3(0.0), 1.0 - intensity);
+      
+      gl_FragColor = vec4(color, 1.0);
     }
   `;
 
