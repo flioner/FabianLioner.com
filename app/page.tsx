@@ -6,6 +6,8 @@ import Draggable from "react-draggable";
 import { useState } from "react";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
+import Blob from "./components/threejs/grainybg";
+
 export default function Home() {
   /* Beginning of Navbar Logic */
   const [showSettings, setShowSettings] = useState(false);
@@ -58,6 +60,9 @@ export default function Home() {
             loop: true,
           }}
         />
+        <div className={s.bgBlob}>
+          <Blob />
+        </div>
       </div>
 
       <div className={s.projectSection}>
