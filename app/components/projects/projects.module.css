@@ -2,7 +2,11 @@
   display: flex;
   max-width: 1200px;
 
-  background-color: var(--white);
+  background: linear-gradient(
+    30deg,
+    rgba(210, 210, 210, 1) 0%,
+    rgba(244, 244, 244, 1) 100%
+  );
   margin: 20px 30px;
   padding: 20px 20px;
   box-shadow: 0 0 17px 0px rgba(0, 0, 0, 0.07);
@@ -10,7 +14,6 @@
 }
 
 .project {
-  background-color: var(--white);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -51,10 +54,25 @@
 
 .tech {
   font-size: var(--SX);
-  background-color: var(--main);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 209, 255, 1) 0%,
+    rgba(255, 0, 184, 1) 54%,
+    rgba(172, 0, 255, 1) 97%
+  );
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* <- here it is */
+
   padding: 5px 7px;
   border-radius: calc(var(--radius) - 4px);
   margin-right: 6px;
   margin-bottom: 6px;
   color: white;
 }
+
+/*
+
+background: linear-gradient(90deg, rgb(0, 140, 255), rgb(255, 0, 191));
+
+*/

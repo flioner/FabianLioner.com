@@ -2,6 +2,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .test {
@@ -9,4 +11,86 @@
   width: 100px;
   height: 100px;
   top: -50px;
+}
+
+.container {
+  width: 100%;
+  background: linear-gradient(
+    -30deg,
+    rgba(210, 210, 210, 1) 0%,
+    rgba(244, 244, 244, 1) 100%
+  );
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  border-radius: var(--radius);
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+  box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.363);
+}
+
+.photo {
+  border-radius: 7px;
+  @media (min-width: 600px) {
+    width: 45%;
+    object-fit: cover;
+  }
+  @media (max-width: 600px) {
+    width: inherit;
+  }
+}
+
+.descr {
+  background-color: var(--lightergrey);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 600px) {
+    width: 55%;
+    padding: 10px 20px;
+    margin-left: 10px;
+  }
+  @media (max-width: 600px) {
+    margin-top: 10px;
+    padding: 10px;
+  }
+}
+
+.title {
+  font-weight: 600;
+  padding-bottom: 10px;
+  width: fit-content;
+
+  background: linear-gradient(90deg, rgb(0, 140, 255), rgb(255, 0, 191));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  @media (min-width: 500px) {
+    font-size: var(--L);
+  }
+  @media (max-width: 500px) {
+    font-size: var(--LG);
+  }
+}
+
+.text {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  justify-content: center;
+
+  @media (min-width: 500px) {
+    padding: 10px 0px;
+    font-size: var(--SX);
+  }
+  @media (max-width: 500px) {
+    font-size: var(--S);
+  }
 }

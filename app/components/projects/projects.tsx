@@ -5,6 +5,16 @@ import React, { useState } from "react";
 export default function Projects() {
   const projects = [
     {
+      name: "Menu App Startup",
+      description: "Digital Menu app for local restaurants and bars",
+      technologies: ["Next.js", "Vercel", "Cloudflare", "Team Management"],
+      company: "MenuApp",
+      link: "",
+    },
+  ];
+
+  const oldProjects = [
+    {
       name: "BAMX Cold Chain App",
       description:
         " Multi platfofrm (IOS, Android and Web) app for Mexico’s Food Bank",

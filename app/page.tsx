@@ -69,6 +69,10 @@ export default function Home() {
       <div className={s.projectSection}>
         <AboutMe />
       </div>
+
+      <div className={s.projectSection}>
+        <Projects />
+      </div>
     </main>
   );
 }
