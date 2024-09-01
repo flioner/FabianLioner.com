@@ -3,7 +3,7 @@ import MetaballsPage from "./components/threejs/metaballs";
 import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
 import Draggable from "react-draggable";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Blob from "./components/threejs/grainybg";
@@ -17,15 +17,25 @@ export default function Home() {
   const [isTop, setIsTop] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleCenterButtonClick = ({ selection }: { selection: string }) => {
-    if (selection == "top") {
-      setIsTop(true);
-    } else {
-      setIsTop(false);
+  // Create refs for each section
+  const aboutMeRef = useRef<HTMLDivElement>(null);
+  const projectsRef = useRef<HTMLDivElement>(null);
+
+  const handleNavbarClick = (section: string) => {
+    switch (section) {
+      case "aboutme":
+        aboutMeRef.current?.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "projects":
+        projectsRef.current?.scrollIntoView({ behavior: "smooth" });
+        break;
+      case "experience":
+        // Implement scrolling for Experience section if it exists
+        break;
+      default:
+        break;
     }
-    setPosition({ x: 0, y: 0 });
   };
-  /* End of Navbar Logic */
 
   return (
     <main>
@@ -40,13 +50,22 @@ export default function Home() {
               showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hiddenNav
             }
           >
-            <div className={s.navBtn}>
+            <div
+              className={s.navBtn}
+              onClick={() => handleNavbarClick("aboutme")}
+            >
               <div className={s.navBtnTxt}> About me</div>
             </div>
-            <div className={s.navBtn}>
+            <div
+              className={s.navBtn}
+              onClick={() => handleNavbarClick("projects")}
+            >
               <div className={s.navBtnTxt}> Projects</div>
             </div>
-            <div className={s.navBtn}>
+            <div
+              className={s.navBtn}
+              onClick={() => handleNavbarClick("experience")}
+            >
               <div className={s.navBtnTxt}> Experience</div>
             </div>
           </div>
@@ -72,15 +91,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={s.projectSection}>
+      <div className={s.projectSection} ref={aboutMeRef}>
         <AboutMe />
       </div>
 
-      <div className={s.projectSection}>
+      <div className={s.projectSection} ref={projectsRef}>
         <Projects />
       </div>
     </main>
   );
 }
-
-// <Projects />
