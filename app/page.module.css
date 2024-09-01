@@ -136,6 +136,14 @@
   padding: 0px 10px;
 }
 
+.navBtnTxt:hover {
+  /* Text gradient */
+  background: linear-gradient(90deg, rgb(0, 140, 255), rgb(255, 0, 191));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.4s;
+}
+
 .navBtn2 {
   height: calc(100% - 25px);
   margin: 10px 0px 10px 10px;

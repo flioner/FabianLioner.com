@@ -6,6 +6,20 @@
 
 :root {
   body {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    color: black;
+  }
+  body::-webkit-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    display: none;
+  }
+
+  div::-webkit-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    display: none;
   }
 }
 

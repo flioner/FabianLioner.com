@@ -4,6 +4,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .test {
@@ -15,11 +16,16 @@
 
 .container {
   width: 100%;
-  background: linear-gradient(
-    -30deg,
-    rgba(210, 210, 210, 1) 0%,
-    rgba(244, 244, 244, 1) 100%
-  );
+  max-width: 2200px;
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E"),
+    linear-gradient(
+      -30deg,
+      rgba(210, 210, 210, 1) 0%,
+      rgba(244, 244, 244, 1) 100%
+    );
+
+  background-blend-mode: overlay;
+  background-size: cover;
   margin: 20px;
   padding: 10px;
   display: flex;

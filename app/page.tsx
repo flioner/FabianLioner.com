@@ -40,9 +40,15 @@ export default function Home() {
               showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hiddenNav
             }
           >
-            <div className={s.navBtn}> About me</div>
-            <div className={s.navBtn}> Projects</div>
-            <div className={s.navBtn}> Experience</div>
+            <div className={s.navBtn}>
+              <div className={s.navBtnTxt}> About me</div>
+            </div>
+            <div className={s.navBtn}>
+              <div className={s.navBtnTxt}> Projects</div>
+            </div>
+            <div className={s.navBtn}>
+              <div className={s.navBtnTxt}> Experience</div>
+            </div>
           </div>
         </Draggable>
       </div>
