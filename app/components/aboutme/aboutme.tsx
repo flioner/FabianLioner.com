@@ -20,7 +20,7 @@ export default function AboutMe() {
   return (
     <main className={s.mainBody}>
       <div className={s.container}>
-        <img className={s.photo} src={"pfpv2.jpg"} />
+        <img className={s.photo} src={"/photos/pfpv2.jpg"} />
         <div className={s.descr}>
           <div className={s.text}>
             <div className={s.title}>About Me</div>
