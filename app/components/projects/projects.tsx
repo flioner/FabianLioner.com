@@ -5,6 +5,9 @@ import React, { useState, useEffect, useRef } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+
 export default function Projects() {
   const projects = [
     {
@@ -86,37 +89,40 @@ export default function Projects() {
 
   return (
     <main>
-      <div id="slider" className={s.slider} ref={sliderRef}>
+      <Swiper slidesPerView={"auto"} centeredSlides loop>
         {projects.map((project, index) => (
-          <div key={index} className={`${s.projectCont} ${s.mobile}`}>
-            <div className={s.project}>
-              <h2 className={s.title}>{project.name}</h2>
-              <p className={s.desc}>{project.description}</p>
-              <div className={s.technologies}>
-                {project.technologies.map((tech) => (
-                  <div key={index} className={s.tech}>
-                    {tech}
-                  </div>
-                ))}
-              </div>
-              <div className={s.urlCont}>
-                <a className={s.url} href={project.link}>
-                  View project
-                </a>
-              </div>
-            </div>
+          <SwiperSlide className={s.slide}>
+            <div key={index} className={`${s.projectCont} ${s.mobile}`}>
+              <div className={s.project}>
+                <h2 className={s.title}>{project.name}</h2>
+                <p className={s.desc}>{project.description}</p>
+                <div id="parent" className={s.technologies}>
+                  {project.technologies.map((tech) => (
+                    <div key={index} className={s.tech}>
+                      {tech}
+                    </div>
+                  ))}
+                </div>
 
-            <div className={s.imgCont}>
-              <img
-                draggable="false"
-                className={s.img}
-                src={"/photos/projects/" + project.company + ".png"}
-                alt={project.company + " logo"}
-              />
+                <div className={s.urlCont}>
+                  <a className={s.url} href={project.link}>
+                    View project
+                  </a>
+                </div>
+              </div>
+
+              <div className={s.imgCont}>
+                <img
+                  draggable="false"
+                  className={s.img}
+                  src={"/photos/projects/" + project.company + ".png"}
+                  alt={project.company + " logo"}
+                />
+              </div>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </main>
   );
 }
