@@ -35,64 +35,12 @@ export default function Projects() {
     },
   ];
 
-  const sliderRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-
-    let isDown = false;
-    let startX: number;
-    let scrollLeft: number;
-
-    const onMouseDown = (e: MouseEvent) => {
-      isDown = true;
-      slider.classList.add("active");
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-      slider.style.cursor = "grabbing";
-    };
-
-    const onMouseLeave = () => {
-      isDown = false;
-      slider.classList.remove("active");
-      slider.style.cursor = "grab";
-    };
-
-    const onMouseUp = () => {
-      isDown = false;
-      slider.classList.remove("active");
-      slider.style.cursor = "grab";
-    };
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 2; // Adjust scroll speed
-      slider.scrollLeft = scrollLeft - walk;
-    };
-
-    slider.addEventListener("mousedown", onMouseDown);
-    slider.addEventListener("mouseleave", onMouseLeave);
-    slider.addEventListener("mouseup", onMouseUp);
-    slider.addEventListener("mousemove", onMouseMove);
-
-    // Clean up event listeners on component unmount
-    return () => {
-      slider.removeEventListener("mousedown", onMouseDown);
-      slider.removeEventListener("mouseleave", onMouseLeave);
-      slider.removeEventListener("mouseup", onMouseUp);
-      slider.removeEventListener("mousemove", onMouseMove);
-    };
-  }, []);
-
   return (
     <main>
       <Swiper slidesPerView={"auto"} centeredSlides loop>
         {projects.map((project, index) => (
-          <SwiperSlide className={s.slide}>
-            <div key={index} className={`${s.projectCont} ${s.mobile}`}>
+          <SwiperSlide className={s.slide} key={index}>
+            <div className={`${s.projectCont} ${s.mobile}`}>
               <div className={s.project}>
                 <h2 className={s.title}>{project.name}</h2>
                 <p className={s.desc}>{project.description}</p>
