@@ -2,9 +2,6 @@
 import s from "./projects.module.css";
 import React, { useState, useEffect, useRef } from "react";
 
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
@@ -23,7 +20,7 @@ export default function Projects() {
         "Fully Cloud Native Agile task management app, containerized using Docker and Kubernetes",
       technologies: ["Next.js", "Typescript", "Springboot", "OracleCloud"],
       company: "Oracle",
-      link: "https://menu.fabianlioner.com",
+      link: "https://youtu.be/3tbhMIe6msg?si=A4Ro4MlplAYvRSKu",
     },
     {
       name: "BAMX Cold Chain App",
@@ -31,13 +28,19 @@ export default function Projects() {
         " Multi platfofrm (IOS, Android and Web) app for Mexico’s Food Bank",
       technologies: ["Next.js", "Capacitor", "Lottie", "Cypress"],
       company: "BAMX",
-      link: "https://menu.fabianlioner.com",
+      link: "https://youtu.be/KDZEw_ubQG8?si=fTLrc5ASnBOJOymN",
     },
   ];
 
   return (
-    <main>
-      <Swiper slidesPerView={"auto"} centeredSlides loop>
+    <main className={s.mainCont}>
+      <Swiper
+        direction={"horizontal"}
+        slidesPerView={"auto"}
+        centeredSlides
+        loop
+        initialSlide={2}
+      >
         {projects.map((project, index) => (
           <SwiperSlide className={s.slide} key={index}>
             <div className={`${s.projectCont} ${s.mobile}`}>
