@@ -31,7 +31,6 @@
 
   #parent > div {
     width: fit-content;
-    height: 100%;
     border-radius: 7px;
     background-image: linear-gradient(#28b0f4, #f300c2);
     background-size: 13.25em 22.75em;
