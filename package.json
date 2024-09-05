@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fullpage/react-fullpage": "^0.1.43",
     "@react-three/fiber": "^8.16.1",
     "@types/three": "^0.163.0",
     "glslify": "^7.1.1",

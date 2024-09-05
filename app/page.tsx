@@ -9,6 +9,8 @@ import AboutMe from "./components/aboutme/aboutme";
 import Blob from "./components/threejs/grainybg";
 import ColorBlob from "./components/threejs/grainybgcolor";
 
+import ReactFullpage from "@fullpage/react-fullpage";
+
 export default function Home() {
   /* Beginning of Navbar Logic */
   const [showSettings, setShowSettings] = useState(false);
@@ -39,64 +41,79 @@ export default function Home() {
 
   return (
     <main>
-      <div /* NAVBAR */>
-        <Draggable
-          disabled={isPinned}
-          position={position} // Set position dynamically
-          onStop={(e, data) => setPosition({ x: data.x, y: data.y })} // Update position on drag stop
-        >
-          <div
-            className={
-              showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hiddenNav
-            }
+      <div className="App">
+        <div /* NAVBAR */>
+          <Draggable
+            disabled={isPinned}
+            position={position} // Set position dynamically
+            onStop={(e, data) => setPosition({ x: data.x, y: data.y })} // Update position on drag stop
           >
             <div
-              className={s.navBtn}
-              onClick={() => handleNavbarClick("aboutme")}
+              className={
+                showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hiddenNav
+              }
             >
-              <div className={s.navBtnTxt}> About me</div>
+              <div
+                className={s.navBtn}
+                onClick={() => handleNavbarClick("aboutme")}
+              >
+                <div className={s.navBtnTxt}> About me</div>
+              </div>
+              <div
+                className={s.navBtn}
+                onClick={() => handleNavbarClick("projects")}
+              >
+                <div className={s.navBtnTxt}> Projects</div>
+              </div>
+              <div
+                className={s.navBtn}
+                onClick={() => handleNavbarClick("experience")}
+              >
+                <div className={s.navBtnTxt}> Experience</div>
+              </div>
             </div>
-            <div
-              className={s.navBtn}
-              onClick={() => handleNavbarClick("projects")}
-            >
-              <div className={s.navBtnTxt}> Projects</div>
-            </div>
-            <div
-              className={s.navBtn}
-              onClick={() => handleNavbarClick("experience")}
-            >
-              <div className={s.navBtnTxt}> Experience</div>
-            </div>
-          </div>
-        </Draggable>
-      </div>
-
-      <div /* Landing Page */ className={s.landing}>
-        <div className={s.name}> Fabian Lioner</div>
-
-        <Typewriter
-          options={{
-            strings: [
-              "Front-End Development",
-              "Web Design",
-              "Full-Stack Development",
-            ],
-            autoStart: true,
-            loop: true,
-          }}
-        />
-        <div className={s.bgBlobColor}>
-          <ColorBlob />
+          </Draggable>
         </div>
-      </div>
+        <ReactFullpage
+          credits={{ enabled: false }}
+          render={(comp) => (
+            <ReactFullpage.Wrapper>
+              <div className="section">
+                <div /* Landing Page */ className={s.landing}>
+                  <div className={s.name}> Fabian Lioner</div>
 
-      <div className={s.projectSection} ref={aboutMeRef}>
-        <AboutMe />
-      </div>
+                  <Typewriter
+                    options={{
+                      strings: [
+                        "Front-End Development",
+                        "Web Design",
+                        "Full-Stack Development",
+                      ],
+                      autoStart: true,
+                      loop: true,
+                    }}
+                  />
+                </div>
+              </div>
 
-      <div className={s.projectSection} ref={projectsRef}>
-        <Projects />
+              <div className={s.bgBlobColor}>
+                <ColorBlob />
+              </div>
+
+              <div className="section">
+                <div className={s.projectSection} ref={aboutMeRef}>
+                  <AboutMe />
+                </div>
+              </div>
+
+              <div className="section">
+                <div className={s.projectSection} ref={projectsRef}>
+                  <Projects />
+                </div>
+              </div>
+            </ReactFullpage.Wrapper>
+          )}
+        />
       </div>
     </main>
   );
