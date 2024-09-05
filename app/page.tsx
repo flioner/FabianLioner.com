@@ -15,9 +15,11 @@ import { any } from "three/examples/jsm/nodes/Nodes.js";
 const Navbar = ({
   fullpageApi,
   currentSection,
+  setCurrentSection,
 }: {
   fullpageApi: any;
   currentSection: number;
+  setCurrentSection: Function;
 }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [isPinned, setIsPinned] = useState(true);
@@ -26,13 +28,19 @@ const Navbar = ({
   const handleNavbarClick = (section: string) => {
     switch (section) {
       case "aboutme":
+        setCurrentSection(1);
         fullpageApi.moveTo(2); // Move to the "About Me" section
+
         break;
       case "projects":
+        setCurrentSection(2);
         fullpageApi.moveTo(3); // Move to the "Projects" section
+
         break;
       case "experience":
+        setCurrentSection(3);
         fullpageApi.moveTo(4); // Move to the "Experience" section
+
         break;
       default:
         break;
@@ -95,7 +103,11 @@ export default function Home() {
       <div className="App">
         {/* Navbar is outside ReactFullpage */}
         {fullpageApi && (
-          <Navbar fullpageApi={fullpageApi} currentSection={currentSection} />
+          <Navbar
+            fullpageApi={fullpageApi}
+            currentSection={currentSection}
+            setCurrentSection={setCurrentSection}
+          />
         )}
 
         <ReactFullpage
