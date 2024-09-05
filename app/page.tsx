@@ -3,162 +3,158 @@ import MetaballsPage from "./components/threejs/metaballs";
 import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
 import Draggable from "react-draggable";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import ColorBlob from "./components/threejs/grainybgcolor";
 
-import ReactFullpage from "@fullpage/react-fullpage";
-import { any } from "three/examples/jsm/nodes/Nodes.js";
+import { Swiper, SwiperSlide, Swiper as SwiperType } from "swiper/react";
+import "swiper/css";
+// @ts-ignore
+import { Mousewheel, Swiper as SwiperInstance } from "swiper";
 
-// Navbar component, receiving fullpageApi as a prop
-const Navbar = ({
-  fullpageApi,
-  currentSection,
-  setCurrentSection,
-}: {
-  fullpageApi: any;
-  currentSection: number;
-  setCurrentSection: Function;
-}) => {
+export default function Home() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [isPinned, setIsPinned] = useState(true);
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [currentSection, setCurrentSection] = useState(0);
+
+  // Create a ref to hold the Swiper instance
+  const swiperRef = useRef<SwiperInstance | null>(null);
 
   const handleNavbarClick = (section: string) => {
+    let slideIndex = 0;
     switch (section) {
       case "aboutme":
-        setCurrentSection(1);
-        fullpageApi.moveTo(2); // Move to the "About Me" section
-
+        slideIndex = 1;
         break;
       case "projects":
-        setCurrentSection(2);
-        fullpageApi.moveTo(3); // Move to the "Projects" section
-
+        slideIndex = 2;
         break;
       case "experience":
-        setCurrentSection(3);
-        fullpageApi.moveTo(4); // Move to the "Experience" section
-
+        slideIndex = 3;
         break;
       default:
         break;
     }
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(slideIndex);
+    }
   };
 
-  return (
-    <div>
-      <Draggable
-        disabled={isPinned}
-        position={position}
-        onStop={(e, data) => setPosition({ x: data.x, y: data.y })}
-      >
-        <div className={showNavbar ? s.navbar : s.hiddenNav}>
-          <div
-            className={s.navBtn}
-            onClick={() => handleNavbarClick("aboutme")}
-          >
-            <div
-              className={currentSection == 1 ? s.navBtnTxtCurrent : s.navBtnTxt}
-            >
-              About Me
-            </div>
-            <div className={s.navBtnTxtC}>About Me</div>
-          </div>
-          <div
-            className={s.navBtn}
-            onClick={() => handleNavbarClick("projects")}
-          >
-            <div
-              className={currentSection == 2 ? s.navBtnTxtCurrent : s.navBtnTxt}
-            >
-              Projects
-            </div>
-            <div className={s.navBtnTxtC}>Projects</div>
-          </div>
-          <div
-            className={s.navBtn}
-            onClick={() => handleNavbarClick("experience")}
-          >
-            <div
-              className={currentSection == 3 ? s.navBtnTxtCurrent : s.navBtnTxt}
-            >
-              Experience
-            </div>
-            <div className={s.navBtnTxtC}>Experience</div>
-          </div>
-        </div>
-      </Draggable>
-    </div>
-  );
-};
-
-export default function Home() {
-  const [currentSection, setCurrentSection] = useState(0);
-  const [fullpageApi, setFullpageApi] = useState<any>(null);
+  // Update currentSection when slide changes
+  useEffect(() => {
+    const handleSlideChange = () => {
+      if (swiperRef.current) {
+        setCurrentSection(swiperRef.current.activeIndex);
+      }
+    };
+    if (swiperRef.current) {
+      swiperRef.current.on("slideChange", handleSlideChange);
+    }
+    return () => {
+      if (swiperRef.current) {
+        swiperRef.current.off("slideChange", handleSlideChange);
+      }
+    };
+  }, []);
 
   return (
     <main>
-      <div className="App">
-        {/* Navbar is outside ReactFullpage */}
-        {fullpageApi && (
-          <Navbar
-            fullpageApi={fullpageApi}
-            currentSection={currentSection}
-            setCurrentSection={setCurrentSection}
-          />
-        )}
-
-        <ReactFullpage
-          credits={{ enabled: false }}
-          afterLoad={(origin, destination) => {
-            setCurrentSection(destination.index);
-          }}
-          render={({ fullpageApi: api }) => {
-            if (!fullpageApi) {
-              setFullpageApi(api);
-            }
-            return (
-              <ReactFullpage.Wrapper>
-                <div className="section">
-                  <div /* Landing Page */ className={s.landing}>
-                    <div className={s.name}> Fabian Lioner</div>
-
-                    <Typewriter
-                      options={{
-                        strings: [
-                          "Front-End Development",
-                          "Web Design",
-                          "Full-Stack Development",
-                        ],
-                        autoStart: true,
-                        loop: true,
-                      }}
-                    />
-                  </div>
-                </div>
-
-                <div className={s.bgBlobColor}>
-                  <ColorBlob />
-                </div>
-
-                <div className="section">
-                  <div className={s.projectSection}>
-                    <AboutMe />
-                  </div>
-                </div>
-
-                <div className="section">
-                  <div className={s.projectSection}>
-                    <Projects />
-                  </div>
-                </div>
-              </ReactFullpage.Wrapper>
-            );
-          }}
-        />
+      <div>
+        <Draggable
+          disabled={isPinned}
+          position={position}
+          onStop={(e, data) => setPosition({ x: data.x, y: data.y })}
+        >
+          <div className={showNavbar ? s.navbar : s.hiddenNav}>
+            <div
+              className={s.navBtn}
+              onClick={() => handleNavbarClick("aboutme")}
+            >
+              <div
+                className={
+                  currentSection === 1 ? s.navBtnTxtCurrent : s.navBtnTxt
+                }
+              >
+                About Me
+              </div>
+              <div className={s.navBtnTxtC}>About Me</div>
+            </div>
+            <div
+              className={s.navBtn}
+              onClick={() => handleNavbarClick("projects")}
+            >
+              <div
+                className={
+                  currentSection === 2 ? s.navBtnTxtCurrent : s.navBtnTxt
+                }
+              >
+                Projects
+              </div>
+              <div className={s.navBtnTxtC}>Projects</div>
+            </div>
+            <div
+              className={s.navBtn}
+              onClick={() => handleNavbarClick("experience")}
+            >
+              <div
+                className={
+                  currentSection === 3 ? s.navBtnTxtCurrent : s.navBtnTxt
+                }
+              >
+                Experience
+              </div>
+              <div className={s.navBtnTxtC}>Experience</div>
+            </div>
+          </div>
+        </Draggable>
       </div>
+
+      <Swiper
+        className={s.slider}
+        direction={"vertical"}
+        slidesPerView={"auto"}
+        centeredSlides
+        mousewheel={true}
+        modules={[Mousewheel]}
+        speed={700}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
+      >
+        <SwiperSlide>
+          <div className="section">
+            <div /* Landing Page */ className={s.landing}>
+              <div className={s.name}> Fabian Lioner</div>
+
+              <Typewriter
+                options={{
+                  strings: [
+                    "Front-End Development",
+                    "Web Design",
+                    "Full-Stack Development",
+                  ],
+                  autoStart: true,
+                  loop: true,
+                }}
+              />
+            </div>
+          </div>
+
+          <div className={s.bgBlobColor}>
+            <ColorBlob />
+          </div>
+        </SwiperSlide>
+
+        <SwiperSlide className={s.projectSection}>
+          <AboutMe />
+        </SwiperSlide>
+
+        <SwiperSlide className={s.projectSection}>
+          <Projects />
+        </SwiperSlide>
+      </Swiper>
     </main>
   );
 }
