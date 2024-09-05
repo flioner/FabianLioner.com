@@ -52,7 +52,7 @@
 }
 
 .descr {
-  background-color: var(--lightergrey);
+  background-color: var(--lightestgrey);
   border-radius: 7px;
   display: flex;
   flex-direction: column;

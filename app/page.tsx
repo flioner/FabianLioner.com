@@ -3,36 +3,36 @@ import MetaballsPage from "./components/threejs/metaballs";
 import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
 import Draggable from "react-draggable";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
-import Blob from "./components/threejs/grainybg";
 import ColorBlob from "./components/threejs/grainybgcolor";
 
 import ReactFullpage from "@fullpage/react-fullpage";
+import { any } from "three/examples/jsm/nodes/Nodes.js";
 
-export default function Home() {
-  /* Beginning of Navbar Logic */
-  const [showSettings, setShowSettings] = useState(false);
+// Navbar component, receiving fullpageApi as a prop
+const Navbar = ({
+  fullpageApi,
+  currentSection,
+}: {
+  fullpageApi: any;
+  currentSection: number;
+}) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [isPinned, setIsPinned] = useState(true);
-  const [isTop, setIsTop] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  // Create refs for each section
-  const aboutMeRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
 
   const handleNavbarClick = (section: string) => {
     switch (section) {
       case "aboutme":
-        aboutMeRef.current?.scrollIntoView({ behavior: "smooth" });
+        fullpageApi.moveTo(2); // Move to the "About Me" section
         break;
       case "projects":
-        projectsRef.current?.scrollIntoView({ behavior: "smooth" });
+        fullpageApi.moveTo(3); // Move to the "Projects" section
         break;
       case "experience":
-        // Implement scrolling for Experience section if it exists
+        fullpageApi.moveTo(4); // Move to the "Experience" section
         break;
       default:
         break;
@@ -40,79 +40,111 @@ export default function Home() {
   };
 
   return (
-    <main>
-      <div className="App">
-        <div /* NAVBAR */>
-          <Draggable
-            disabled={isPinned}
-            position={position} // Set position dynamically
-            onStop={(e, data) => setPosition({ x: data.x, y: data.y })} // Update position on drag stop
+    <div>
+      <Draggable
+        disabled={isPinned}
+        position={position}
+        onStop={(e, data) => setPosition({ x: data.x, y: data.y })}
+      >
+        <div className={showNavbar ? s.navbar : s.hiddenNav}>
+          <div
+            className={s.navBtn}
+            onClick={() => handleNavbarClick("aboutme")}
           >
             <div
-              className={
-                showNavbar ? (isTop ? s.navbarTop : s.navbar) : s.hiddenNav
-              }
+              className={currentSection == 1 ? s.navBtnTxtCurrent : s.navBtnTxt}
             >
-              <div
-                className={s.navBtn}
-                onClick={() => handleNavbarClick("aboutme")}
-              >
-                <div className={s.navBtnTxt}> About me</div>
-              </div>
-              <div
-                className={s.navBtn}
-                onClick={() => handleNavbarClick("projects")}
-              >
-                <div className={s.navBtnTxt}> Projects</div>
-              </div>
-              <div
-                className={s.navBtn}
-                onClick={() => handleNavbarClick("experience")}
-              >
-                <div className={s.navBtnTxt}> Experience</div>
-              </div>
+              About Me
             </div>
-          </Draggable>
+            <div className={s.navBtnTxtC}>About Me</div>
+          </div>
+          <div
+            className={s.navBtn}
+            onClick={() => handleNavbarClick("projects")}
+          >
+            <div
+              className={currentSection == 2 ? s.navBtnTxtCurrent : s.navBtnTxt}
+            >
+              Projects
+            </div>
+            <div className={s.navBtnTxtC}>Projects</div>
+          </div>
+          <div
+            className={s.navBtn}
+            onClick={() => handleNavbarClick("experience")}
+          >
+            <div
+              className={currentSection == 3 ? s.navBtnTxtCurrent : s.navBtnTxt}
+            >
+              Experience
+            </div>
+            <div className={s.navBtnTxtC}>Experience</div>
+          </div>
         </div>
+      </Draggable>
+    </div>
+  );
+};
+
+export default function Home() {
+  const [currentSection, setCurrentSection] = useState(0);
+  const [fullpageApi, setFullpageApi] = useState<any>(null);
+
+  return (
+    <main>
+      <div className="App">
+        {/* Navbar is outside ReactFullpage */}
+        {fullpageApi && (
+          <Navbar fullpageApi={fullpageApi} currentSection={currentSection} />
+        )}
+
         <ReactFullpage
           credits={{ enabled: false }}
-          render={(comp) => (
-            <ReactFullpage.Wrapper>
-              <div className="section">
-                <div /* Landing Page */ className={s.landing}>
-                  <div className={s.name}> Fabian Lioner</div>
+          afterLoad={(origin, destination) => {
+            setCurrentSection(destination.index);
+          }}
+          render={({ fullpageApi: api }) => {
+            if (!fullpageApi) {
+              setFullpageApi(api);
+            }
+            return (
+              <ReactFullpage.Wrapper>
+                <div className="section">
+                  <div /* Landing Page */ className={s.landing}>
+                    <div className={s.name}> Fabian Lioner</div>
 
-                  <Typewriter
-                    options={{
-                      strings: [
-                        "Front-End Development",
-                        "Web Design",
-                        "Full-Stack Development",
-                      ],
-                      autoStart: true,
-                      loop: true,
-                    }}
-                  />
+                    <Typewriter
+                      options={{
+                        strings: [
+                          "Front-End Development",
+                          "Web Design",
+                          "Full-Stack Development",
+                        ],
+                        autoStart: true,
+                        loop: true,
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className={s.bgBlobColor}>
-                <ColorBlob />
-              </div>
-
-              <div className="section">
-                <div className={s.projectSection} ref={aboutMeRef}>
-                  <AboutMe />
+                <div className={s.bgBlobColor}>
+                  <ColorBlob />
                 </div>
-              </div>
 
-              <div className="section">
-                <div className={s.projectSection} ref={projectsRef}>
-                  <Projects />
+                <div className="section">
+                  <div className={s.projectSection}>
+                    <AboutMe />
+                  </div>
                 </div>
-              </div>
-            </ReactFullpage.Wrapper>
-          )}
+
+                <div className="section">
+                  <div className={s.projectSection}>
+                    <Projects />
+                  </div>
+                </div>
+              </ReactFullpage.Wrapper>
+            );
+          }}
         />
       </div>
     </main>

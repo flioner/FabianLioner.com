@@ -58,6 +58,7 @@
 }
 
 /* NAVBAR BEGINNING */
+
 .navbar {
   position: fixed;
   bottom: 30px;
@@ -134,16 +135,43 @@
   border-radius: 15px;
   cursor: pointer;
   padding: 0px 10px;
+  width: fit-content;
 }
 
+.navBtnTxt {
+  /* Text gradient */
+  color: black;
+  position: absolute;
+  opacity: 1;
+  z-index: 2;
+  transition: 0.6s;
+}
 .navBtnTxt:hover {
   /* Text gradient */
+  color: black;
+  position: absolute;
+  opacity: 0.6;
+  z-index: 2;
+  transition: 0.6s;
+}
+
+.navBtnTxtCurrent {
+  /* Text gradient */
+  color: black;
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+  transition: 0.6s;
+}
+
+.navBtnTxtC {
+  /* Text gradient */
+  position: relative;
   background: linear-gradient(90deg, rgb(0, 140, 255), rgb(255, 0, 191));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: 0.4s;
+  opacity: 1;
 }
-
 .navBtn2 {
   height: calc(100% - 25px);
   margin: 10px 0px 10px 10px;

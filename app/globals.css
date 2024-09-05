@@ -52,6 +52,10 @@
   #parent > div:nth-of-type(6) {
     background-position: 0 -22.125em;
   }
+
+  div.fp-watermark {
+    display: none;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
