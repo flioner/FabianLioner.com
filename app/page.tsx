@@ -61,13 +61,13 @@ export default function Home() {
 
   return (
     <main>
-      <div>
+      <div className={s.responsiveness}>
         <Draggable
           disabled={isPinned}
           position={position}
           onStop={(e, data) => setPosition({ x: data.x, y: data.y })}
         >
-          <div className={showNavbar ? s.navbar : s.hiddenNav}>
+          <div className={s.navbar}>
             <div
               className={s.navBtn}
               onClick={() => handleNavbarClick("aboutme")}
@@ -141,10 +141,6 @@ export default function Home() {
               />
             </div>
           </div>
-
-          <div className={s.bgBlobColor}>
-            <ColorBlob />
-          </div>
         </SwiperSlide>
 
         <SwiperSlide className={s.projectSection}>
@@ -158,3 +154,8 @@ export default function Home() {
     </main>
   );
 }
+/*
+<div className={s.bgBlobColor}>
+<ColorBlob />
+</div>
+*/
