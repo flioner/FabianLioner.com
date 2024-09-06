@@ -19,6 +19,9 @@ export default function Home() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [currentSection, setCurrentSection] = useState(0);
 
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const transitionSpeed = isMobile ? 300 : 700;
+
   // Create a ref to hold the Swiper instance
   const swiperRef = useRef<SwiperInstance | null>(null);
 
@@ -116,9 +119,9 @@ export default function Home() {
         direction={"vertical"}
         slidesPerView={"auto"}
         centeredSlides
+        speed={transitionSpeed}
         mousewheel={true}
         modules={[Mousewheel]}
-        speed={700}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
@@ -140,6 +143,9 @@ export default function Home() {
                 }}
               />
             </div>
+            <div className={s.bgBlobColor}>
+              <ColorBlob />
+            </div>
           </div>
         </SwiperSlide>
 
@@ -155,7 +161,5 @@ export default function Home() {
   );
 }
 /*
-<div className={s.bgBlobColor}>
-<ColorBlob />
-</div>
+
 */
