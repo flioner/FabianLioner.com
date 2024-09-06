@@ -130,7 +130,7 @@ export default function Home() {
       <Swiper
         className={s.slider}
         direction={"vertical"}
-        speed={isMobile ? 300 : 700} // Adjust speed based on device
+        speed={isMobile ? 200 : 700} // Adjust speed based on device
         mousewheel={true}
         modules={[Mousewheel]}
         onSwiper={(swiper) => {
