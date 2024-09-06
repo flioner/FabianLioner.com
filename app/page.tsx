@@ -6,7 +6,7 @@ import Draggable from "react-draggable";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Experience from "./components/experience/experience";
-import ColorBlob from "./components/threejs/grainybgcolor";
+import ColorBlob from "./components/threejs/optimizedLanding";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 // @ts-ignore
