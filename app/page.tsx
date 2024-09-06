@@ -1,6 +1,5 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import MetaballsPage from "./components/threejs/metaballs";
 import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
 import Draggable from "react-draggable";
