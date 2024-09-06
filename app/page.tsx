@@ -1,13 +1,13 @@
 "use client";
+import { useState, useRef, useEffect } from "react";
 import MetaballsPage from "./components/threejs/metaballs";
 import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
 import Draggable from "react-draggable";
-import { useState, useRef, useEffect } from "react";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
+import Experience from "./components/experience/experience";
 import ColorBlob from "./components/threejs/grainybgcolor";
-
 import { Swiper, SwiperSlide, Swiper as SwiperType } from "swiper/react";
 import "swiper/css";
 // @ts-ignore
@@ -17,7 +17,11 @@ export default function Home() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [isPinned, setIsPinned] = useState(true);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [currentSection, setCurrentSection] = useState(0);
+  const [currentSection, setCurrentSection] = useState<number>(() => {
+    // Retrieve the saved slide index from localStorage or default to 0
+    const savedIndex = localStorage.getItem("currentSlideIndex");
+    return savedIndex ? parseInt(savedIndex) : 0;
+  });
 
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const transitionSpeed = isMobile ? 300 : 700;
@@ -45,16 +49,20 @@ export default function Home() {
     }
   };
 
-  // Update currentSection when slide changes
+  // Update currentSection when slide changes and save to localStorage
   useEffect(() => {
     const handleSlideChange = () => {
       if (swiperRef.current) {
-        setCurrentSection(swiperRef.current.activeIndex);
+        const newIndex = swiperRef.current.activeIndex;
+        setCurrentSection(newIndex);
+        // Save the current slide index to localStorage
+        localStorage.setItem("currentSlideIndex", newIndex.toString());
       }
     };
     if (swiperRef.current) {
       swiperRef.current.on("slideChange", handleSlideChange);
     }
+
     return () => {
       if (swiperRef.current) {
         swiperRef.current.off("slideChange", handleSlideChange);
@@ -122,8 +130,11 @@ export default function Home() {
         speed={transitionSpeed}
         mousewheel={true}
         modules={[Mousewheel]}
+        initialSlide={currentSection} // Set initial slide index here
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
+          // Slide to saved index on load
+          swiper.slideTo(currentSection);
         }}
       >
         <SwiperSlide>
@@ -156,10 +167,11 @@ export default function Home() {
         <SwiperSlide className={s.projectSection}>
           <Projects />
         </SwiperSlide>
+
+        <SwiperSlide className={s.projectSection}>
+          <Experience />
+        </SwiperSlide>
       </Swiper>
     </main>
   );
 }
-/*
-
-*/

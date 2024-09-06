@@ -1,0 +1,199 @@
+.mainCont {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Experiencia */
+
+.eCont {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 20px;
+  padding: max(min(1.5vw, 30px), 15px);
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E"),
+    linear-gradient(
+      -30deg,
+      rgba(210, 210, 210, 1) 0%,
+      rgba(244, 244, 244, 1) 100%
+    );
+
+  background-blend-mode: overlay;
+  background-size: cover;
+  border-radius: max(min(1vw, 10px), 7px);
+  animation: fadeIn 1s ease-in-out both;
+  transition: 0.3s;
+}
+
+.eCont:hover {
+  @media (min-width: 0px) {
+    scale: 1.07;
+  }
+  @media (min-width: 1000px) {
+    scale: 1.1;
+    margin: 30px;
+  }
+  @media (min-width: 1470px) {
+    scale: 1.2;
+    margin: 50px 30px 30px 30px;
+  }
+
+  transition: 0.3s;
+}
+
+.eContS {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 20px;
+  padding: max(min(1.5vw, 30px), 15px);
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E"),
+    linear-gradient(
+      -30deg,
+      rgba(210, 210, 210, 1) 0%,
+      rgba(244, 244, 244, 1) 100%
+    );
+  background-blend-mode: overlay;
+  background-size: cover;
+  border-radius: max(min(1vw, 10px), 7px);
+  animation: fadeIn 1s ease-in-out both;
+
+  transition: 0.3s;
+}
+
+.eContS:hover {
+  @media (min-width: 00px) {
+    scale: 1.05;
+  }
+  @media (min-width: 1000px) {
+    scale: 1.1;
+    margin: 30px;
+  }
+  @media (min-width: 1470px) {
+    scale: 1.2;
+    margin: 40px;
+  }
+
+  transition: 0.3s;
+}
+
+.eTxtContS {
+  height: 100%;
+  max-height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.eTitleS {
+  font-size: var(--S);
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.eCompanyS {
+  font-size: var(--XS);
+  font-weight: 500;
+  color: var(--darkergrey);
+  transition: 0.3s;
+}
+
+.eCompanyS:hover {
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.eDescS {
+  font-size: var(--XXS);
+  transition: 0.3s;
+}
+
+.eDateS {
+  font-size: var(--XXS);
+  font-weight: 500;
+  color: var(--darkgrey);
+  transition: 0.3s;
+}
+.eSkillsS {
+  font-size: var(--XXS);
+  font-style: italic;
+  color: var(--darkgrey);
+  transition: 0.3s;
+}
+
+.eImgS {
+  max-width: 30%;
+  height: auto;
+  max-height: 150px;
+  padding: 20px;
+  margin-right: max(min(1.5vw, 30px), 15px);
+  transition: 0.3s;
+}
+
+/* Skills */
+.skillCont {
+  margin-top: 20px;
+  max-width: 1220px;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(90% + 20px);
+}
+
+.skill {
+  flex: 1;
+  min-width: 100px;
+  min-height: 40px;
+
+  border-radius: max(min(1vw, 10px), 7px);
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E"),
+    linear-gradient(
+      -30deg,
+      rgba(210, 210, 210, 1) 0%,
+      rgba(244, 244, 244, 1) 100%
+    );
+  background-blend-mode: overlay;
+  background-size: cover;
+  transition: 0.3s;
+  font-size: var(--XS);
+  font-weight: 500;
+  color: var(--darkgrey);
+  animation: fadeIn 1s both;
+}
+
+.skill:hover {
+  scale: 1.1;
+  transition: 0.3s;
+}
+
+.skillY {
+  padding-left: 5px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0%;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 100%;
+    transform: translateY(0px);
+  }
+}
