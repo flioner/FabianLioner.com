@@ -7,26 +7,53 @@ import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Experience from "./components/experience/experience";
 import ColorBlob from "./components/threejs/grainybgcolor";
-import { Swiper, SwiperSlide, Swiper as SwiperType } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 // @ts-ignore
-import { Mousewheel, Swiper as SwiperInstance } from "swiper";
+import { Mousewheel } from "swiper";
 
 export default function Home() {
   const [showNavbar, setShowNavbar] = useState(true);
   const [isPinned, setIsPinned] = useState(true);
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [currentSection, setCurrentSection] = useState<number>(() => {
+  const [currentSection, setCurrentSection] = useState<number>(0);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const swiperRef = useRef<any>(null);
+
+  // Check if the environment is a browser
+  useEffect(() => {
+    // Check if navigator is available (client-side)
+    if (typeof navigator !== "undefined") {
+      setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    }
+
     // Retrieve the saved slide index from localStorage or default to 0
     const savedIndex = localStorage.getItem("currentSlideIndex");
-    return savedIndex ? parseInt(savedIndex) : 0;
-  });
+    setCurrentSection(savedIndex ? parseInt(savedIndex) : 0);
+  }, []);
 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  const transitionSpeed = isMobile ? 300 : 700;
+  // Set up the Swiper instance and its event listeners
+  useEffect(() => {
+    if (swiperRef.current) {
+      // Set the initial slide and mark Swiper as ready
+      swiperRef.current.slideTo(currentSection, 0); // Set to slide without transition
+      const handleSlideChange = () => {
+        if (swiperRef.current) {
+          const newIndex = swiperRef.current.activeIndex;
+          setCurrentSection(newIndex);
+          // Save the current slide index to localStorage
+          localStorage.setItem("currentSlideIndex", newIndex.toString());
+        }
+      };
 
-  // Create a ref to hold the Swiper instance
-  const swiperRef = useRef<SwiperInstance | null>(null);
+      swiperRef.current.on("slideChange", handleSlideChange);
+
+      return () => {
+        swiperRef.current.off("slideChange", handleSlideChange);
+      };
+    }
+  }, [currentSection]);
 
   const handleNavbarClick = (section: string) => {
     let slideIndex = 0;
@@ -47,27 +74,6 @@ export default function Home() {
       swiperRef.current.slideTo(slideIndex);
     }
   };
-
-  // Update currentSection when slide changes and save to localStorage
-  useEffect(() => {
-    const handleSlideChange = () => {
-      if (swiperRef.current) {
-        const newIndex = swiperRef.current.activeIndex;
-        setCurrentSection(newIndex);
-        // Save the current slide index to localStorage
-        localStorage.setItem("currentSlideIndex", newIndex.toString());
-      }
-    };
-    if (swiperRef.current) {
-      swiperRef.current.on("slideChange", handleSlideChange);
-    }
-
-    return () => {
-      if (swiperRef.current) {
-        swiperRef.current.off("slideChange", handleSlideChange);
-      }
-    };
-  }, []);
 
   return (
     <main>
@@ -126,14 +132,13 @@ export default function Home() {
         direction={"vertical"}
         slidesPerView={"auto"}
         centeredSlides
-        speed={transitionSpeed}
+        speed={isMobile ? 300 : 700} // Adjust speed based on device
         mousewheel={true}
         modules={[Mousewheel]}
-        initialSlide={currentSection} // Set initial slide index here
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
-          // Slide to saved index on load
-          swiper.slideTo(currentSection);
+          // Set the slide to the saved index without transition
+          swiper.slideTo(currentSection, 0); // Immediate transition
         }}
       >
         <SwiperSlide>
