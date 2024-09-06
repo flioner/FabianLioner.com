@@ -31,13 +31,20 @@ export default function Home() {
     // Retrieve the saved slide index from localStorage or default to 0
     const savedIndex = localStorage.getItem("currentSlideIndex");
     setCurrentSection(savedIndex ? parseInt(savedIndex) : 0);
+
+    // aqui ya que recibimos el slide index de localstorage
+    // checamos la inicialización de Swiper y nos vamos a la slide correcta
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(savedIndex, 0);
+    }
+    // ya funciona :)
   }, []);
 
   // Set up the Swiper instance and its event listeners
   useEffect(() => {
     if (swiperRef.current) {
       // Set the initial slide and mark Swiper as ready
-      swiperRef.current.slideTo(currentSection, 0); // Set to slide without transition
+      // swiperRef.current.slideTo(currentSection, 0); // Set to slide without transition
       const handleSlideChange = () => {
         if (swiperRef.current) {
           const newIndex = swiperRef.current.activeIndex;
@@ -135,7 +142,6 @@ export default function Home() {
         modules={[Mousewheel]}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
-          swiper.slideTo(currentSection, 0); // Immediate transition
         }}
       >
         <SwiperSlide>
