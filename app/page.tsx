@@ -130,14 +130,11 @@ export default function Home() {
       <Swiper
         className={s.slider}
         direction={"vertical"}
-        slidesPerView={"auto"}
-        centeredSlides
         speed={isMobile ? 300 : 700} // Adjust speed based on device
         mousewheel={true}
         modules={[Mousewheel]}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
-          // Set the slide to the saved index without transition
           swiper.slideTo(currentSection, 0); // Immediate transition
         }}
       >

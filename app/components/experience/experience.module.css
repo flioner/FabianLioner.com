@@ -102,6 +102,7 @@
 }
 
 .eCompanyS {
+  width: fit-content;
   font-size: var(--XS);
   font-weight: 500;
   color: var(--darkergrey);
