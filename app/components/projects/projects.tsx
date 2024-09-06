@@ -16,8 +16,7 @@ export default function Projects() {
     },
     {
       name: "Oracle Java Bot",
-      description:
-        "Fully Cloud Native Agile task management app, containerized using Docker and Kubernetes",
+      description: "Fully Cloud Native Agile task management app",
       technologies: ["Next.js", "Typescript", "Springboot", "OracleCloud"],
       company: "Oracle",
       link: "https://youtu.be/3tbhMIe6msg?si=A4Ro4MlplAYvRSKu",
