@@ -110,7 +110,7 @@ const Skills: React.FC<SkillsProps> = ({ skills }) => {
           }}
         >
           <div className={s.skillTxt}>{nombre}</div>
-          <div className={s.skillY}>{"(" + calculateYears(initial) + "y)"}</div>
+          <div className={s.skillY}>{calculateYears(initial) + "y"}</div>
         </div>
       ))}
     </div>
