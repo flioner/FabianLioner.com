@@ -34,24 +34,28 @@ export default function Projects() {
   return (
     <main className={s.mainCont}>
       <Swiper
+        className={s.slider}
         direction={"horizontal"}
         slidesPerView={"auto"}
         centeredSlides
         loop
         initialSlide={2}
+        autoHeight={true}
       >
         {projects.map((project, index) => (
           <SwiperSlide className={s.slide} key={index}>
             <div className={`${s.projectCont} ${s.mobile}`}>
               <div className={s.project}>
-                <h2 className={s.title}>{project.name}</h2>
-                <p className={s.desc}>{project.description}</p>
-                <div id="parent" className={s.technologies}>
-                  {project.technologies.map((tech) => (
-                    <div key={index} className={s.tech}>
-                      {tech}
-                    </div>
-                  ))}
+                <div className={s.projectInner}>
+                  <h2 className={s.title}>{project.name}</h2>
+                  <p className={s.desc}>{project.description}</p>
+                  <div id="parent" className={s.technologies}>
+                    {project.technologies.map((tech) => (
+                      <div key={index} className={s.tech}>
+                        {tech}
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
                 <div className={s.urlCont}>

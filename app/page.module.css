@@ -1,6 +1,25 @@
-.slider {
-  height: 100vh;
+.mainCont {
+  scroll-snap-type: y mandatory;
 }
+
+/* Projects */
+
+.projectSection2 {
+  scroll-snap-align: start;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
+.projectSection {
+  scroll-snap-align: start;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+}
+
 .landing {
   position: relative;
   width: 100%;
@@ -234,15 +253,6 @@
   );
   width: 100%;
   height: 20%;
-}
-
-/* Projects */
-
-.projectSection {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
 }
 
 @keyframes popIn {
