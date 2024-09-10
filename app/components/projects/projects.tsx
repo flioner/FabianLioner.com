@@ -40,7 +40,7 @@ export default function Projects() {
         centeredSlides
         loop
         initialSlide={2}
-        autoHeight={true}
+        autoHeight={false}
       >
         {projects.map((project, index) => (
           <SwiperSlide className={s.slide} key={index}>

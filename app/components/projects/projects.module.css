@@ -1,29 +1,30 @@
 .mainCont {
-  height: 100vh;
+  height: fit-content;
   display: flex;
   align-items: center;
+  height: 100vh;
 }
 
+.slide2 {
+  height: 100px;
+}
 .slider {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: fit-content;
+  align-items: stretch !important;
+  padding-bottom: 40px;
 }
 
 .slide {
   position: relative;
   width: 90%;
-  height: 100%;
   max-width: 1400px;
+  height: auto;
 }
 
 .projectCont {
-  margin: 20px;
-
+  margin: 0px 20px;
   user-select: none;
   scroll-snap-align: start;
-  height: 100% !important;
   flex-shrink: 0;
   display: flex !important;
 
@@ -43,6 +44,8 @@
 
   @media (max-width: 850px) {
     justify-content: space-between;
+
+    height: 100%;
   }
   @media (min-width: 850px) {
     justify-content: space-between;
