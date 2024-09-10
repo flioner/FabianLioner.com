@@ -41,13 +41,13 @@
 
 .eCont:hover {
   @media (min-width: 0px) {
-    scale: 1.07;
+    scale: 1.075;
   }
   @media (min-width: 1000px) {
     scale: 1.1;
   }
   @media (min-width: 1470px) {
-    scale: 1.2;
+    scale: 1.15;
   }
 
   transition: 0.3s;
@@ -81,16 +81,15 @@
 }
 
 .eContS:hover {
-  @media (min-width: 00px) {
-    scale: 1.05;
+  @media (min-width: 0px) {
+    scale: 1.075;
   }
   @media (min-width: 1000px) {
     scale: 1.1;
   }
   @media (min-width: 1470px) {
-    scale: 1.2;
+    scale: 1.15;
   }
-
   transition: 0.4s;
 }
 
