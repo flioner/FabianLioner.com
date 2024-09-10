@@ -147,7 +147,9 @@ export default function Home() {
 
       <div className={s.mainCont}>
         <div
-          ref={(el) => (sectionRefs.current[0] = el)}
+          ref={(el) => {
+            sectionRefs.current[0] = el;
+          }}
           className={s.projectSection2}
         >
           <div className={s.landing}>
@@ -168,21 +170,27 @@ export default function Home() {
         </div>
 
         <div
-          ref={(el) => (sectionRefs.current[1] = el)}
+          ref={(el) => {
+            sectionRefs.current[1] = el;
+          }}
           className={s.projectSection}
         >
           <AboutMe />
         </div>
 
         <div
-          ref={(el) => (sectionRefs.current[2] = el)}
+          ref={(el) => {
+            sectionRefs.current[2] = el;
+          }}
           className={s.projectSection2}
         >
           <Projects />
         </div>
 
         <div
-          ref={(el) => (sectionRefs.current[3] = el)}
+          ref={(el) => {
+            sectionRefs.current[3] = el;
+          }}
           className={s.projectSection}
         >
           <Experience />
