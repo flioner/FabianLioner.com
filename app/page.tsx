@@ -12,7 +12,7 @@ export default function Home() {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]); // Array of section refs
   const isScrolling = useRef(false); // Used to debounce the scroll behavior
   const sections = ["landing", "aboutme", "projects", "experience"];
-
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null); // Timeout reference for debouncing
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
@@ -84,8 +84,22 @@ export default function Home() {
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
-      const direction = event.deltaY > 0 ? "down" : "up";
-      handleScroll(direction);
+      const threshold = 30; // Set a threshold for trackpad scrolling
+
+      // Only handle scroll if deltaY exceeds a certain threshold
+      if (Math.abs(event.deltaY) > threshold) {
+        const direction = event.deltaY > 0 ? "down" : "up";
+        handleScroll(direction);
+      }
+
+      // Clear previous timeout to debounce
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+
+      scrollTimeout.current = setTimeout(() => {
+        isScrolling.current = false; // Reset scrolling state after inactivity
+      }, 200); // Reset after 200ms of no scroll events
     };
 
     window.addEventListener("wheel", handleWheel, { passive: false });
