@@ -41,6 +41,7 @@
   --SX: max(min(1.3vw, 1.1rem), 0.77rem);
   --XS: max(min(1vw, 1rem), 0.75rem);
   --XXS: max(min(1vw, 1rem), 0.7rem);
+  --XXXS: max(min(0.85vw, 0.9rem), 0.6rem);
 
   /* Extra font sizes */
   @media (max-width: 400px) {

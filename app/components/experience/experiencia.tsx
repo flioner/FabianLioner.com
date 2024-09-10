@@ -54,9 +54,17 @@ const Experiencia: React.FC<ExperienciaProps> = ({ experiencia }) => {
               experienceRefs.current[index] = el;
             }}
           >
-            <img src={src} className={s.eImgS} alt={`${nombre} image`} />
+            <div className={s.eImgSCont}>
+              <img className={s.eImgS} src={src} alt={`${nombre} image`} />
+            </div>
+
             <div className={s.eTxtContS}>
-              <div className={s.eTitleS}>{nombre}</div>
+              <div className={s.eCompanyDual}>
+                <div className={s.eTitleS}>{nombre}</div>
+                <div className={s.eDateS}>
+                  {initial + " - " + (current ? "Current" : final)}
+                </div>
+              </div>
               <a
                 href={url}
                 className={s.eCompanyS}
@@ -65,9 +73,7 @@ const Experiencia: React.FC<ExperienciaProps> = ({ experiencia }) => {
               >
                 {company}
               </a>
-              <div className={s.eDateS}>
-                {initial + " - " + (current ? "Current" : final)}
-              </div>
+
               <div className={s.eDescS}>{desc}</div>
               <div className={s.eSkillsS}>{skills}</div>
             </div>

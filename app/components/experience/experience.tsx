@@ -11,7 +11,7 @@ export default function Experience() {
       company: "Tec de Monterrey",
       desc: "Maintaining and updating a PHP backend and drupal based websites. Refactoring, documenting and migrating internal tools to Next.js.",
       skills: "React, PHP, Scrum, Docker",
-      initial: "August 2023",
+      initial: "Aug 2023",
       final: "",
       current: true,
       url: "https://tec.mx/es",
@@ -22,8 +22,8 @@ export default function Experience() {
       company: "NovoPC",
       desc: "Full-Stack development of an E-Commerce site using the Shopify API, Next.js, Tailwind and Vercel.",
       skills: "Next.js, Tailwind, React, Typescript",
-      initial: "March 2022",
-      final: "November 2022",
+      initial: "Mar 2022",
+      final: "Nov 2022",
       current: false,
       url: "https://novopc.mx",
     },
@@ -33,8 +33,8 @@ export default function Experience() {
       company: "Magic Lantern",
       desc: "Firmware decompilation using Ghidra via a Linux VM to update function stubs.Injection of code to obtain the firmware signature.",
       skills: "C, Linux, Qemu, ARM, Assembly ",
-      initial: "January 2021",
-      final: "March 2021",
+      initial: "Jan 2021",
+      final: "Mar 2021",
       current: false,
       url: "https://www.magiclantern.fm/",
     },
@@ -53,8 +53,21 @@ export default function Experience() {
 
   return (
     <main className={s.mainCont}>
-      <Experiencia experiencia={experiencia} />
-      <Skills skills={skills} />
+      <div className={s.innerCont}>
+        <div className={s.experienciaOuterCont}>
+          <Experiencia experiencia={experiencia} />
+        </div>
+        <div className={s.skillsOuterCont}>
+          <Skills skills={skills} />
+        </div>
+      </div>
     </main>
   );
 }
+
+/* 
+   <Experiencia experiencia={experiencia} />
+             <Skills skills={skills} />
+
+
+*/
