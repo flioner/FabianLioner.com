@@ -48,7 +48,7 @@ const Experiencia: React.FC<ExperienciaProps> = ({ experiencia }) => {
           index
         ) => (
           <div
-            className={index === 0 ? s.eCont : s.eContS}
+            className={s.eCont}
             key={index}
             ref={(el) => {
               experienceRefs.current[index] = el;
