@@ -44,6 +44,11 @@
   @media (max-width: 850px) {
     justify-content: space-between;
   }
+  @media (min-width: 850px) {
+    justify-content: space-between;
+
+    align-items: center;
+  }
 }
 
 .child {
@@ -65,14 +70,16 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+
   margin-right: 20px;
   @media (max-width: 850px) {
     height: 100%;
     justify-content: space-between;
+    gap: 10px;
   }
   @media (min-width: 850px) {
     height: 100%;
+    gap: 40px;
     justify-content: center;
   }
 }
