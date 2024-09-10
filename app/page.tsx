@@ -2,16 +2,17 @@
 import { useState, useRef, useEffect } from "react";
 import s from "./page.module.css";
 import Typewriter from "typewriter-effect";
-import Draggable from "react-draggable";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Experience from "./components/experience/experience";
 import ColorBlob from "./components/threejs/optimizedLanding";
 
 export default function Home() {
-  const [showNavbar, setShowNavbar] = useState(true);
-  const [isPinned, setIsPinned] = useState(true);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [currentSection, setCurrentSection] = useState(0);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]); // Array of section refs
+  const isScrolling = useRef(false); // Used to debounce the scroll behavior
+  const sections = ["landing", "aboutme", "projects", "experience"];
+
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,35 +21,93 @@ export default function Home() {
     }
   }, []);
 
-  const aboutMeRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const experienceRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    // Intersection Observer to detect which section is currently in view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = sectionRefs.current.indexOf(
+              entry.target as HTMLDivElement
+            );
+            if (index !== -1) setCurrentSection(index);
+          }
+        });
+      },
+      { threshold: 0.7 } // Adjust the threshold to determine when the section is considered in view
+    );
+
+    sectionRefs.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      sectionRefs.current.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, []);
 
   const handleNavbarClick = (section: string) => {
-    switch (section) {
-      case "aboutme":
-        aboutMeRef.current?.scrollIntoView({ behavior: "smooth" });
-        break;
-      case "projects":
-        projectsRef.current?.scrollIntoView({ behavior: "smooth" });
-        break;
-      case "experience":
-        experienceRef.current?.scrollIntoView({ behavior: "smooth" });
-        break;
-      default:
-        break;
+    const index = sections.indexOf(section);
+    const targetSection = sectionRefs.current[index];
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const handleScroll = (direction: string) => {
+    if (isScrolling.current) return;
+    isScrolling.current = true;
+
+    let nextSection = currentSection;
+    if (
+      direction === "down" &&
+      currentSection < sectionRefs.current.length - 1
+    ) {
+      nextSection += 1;
+    } else if (direction === "up" && currentSection > 0) {
+      nextSection -= 1;
+    }
+
+    const targetSection = sectionRefs.current[nextSection];
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+    setTimeout(() => {
+      isScrolling.current = false; // Allow scrolling again after animation finishes
+    }, 800); // Time should match the scroll animation duration
+  };
+
+  // Listen to wheel event and trigger smooth scroll
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      const direction = event.deltaY > 0 ? "down" : "up";
+      handleScroll(direction);
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, [currentSection]);
 
   return (
     <main>
       <div className={s.responsiveness}>
-        <div className={isMobile ? s.navbar : s.hidden}>
+        <div className={!isMobile ? s.navbar : s.hidden}>
           <div
             className={s.navBtn}
             onClick={() => handleNavbarClick("aboutme")}
           >
-            <div className={false ? s.navBtnTxtCurrent : s.navBtnTxt}>
+            <div
+              className={
+                currentSection === 1 ? s.navBtnTxtCurrent : s.navBtnTxt
+              }
+            >
               About Me
             </div>
             <div className={s.navBtnTxtC}>About Me</div>
@@ -57,7 +116,11 @@ export default function Home() {
             className={s.navBtn}
             onClick={() => handleNavbarClick("projects")}
           >
-            <div className={false ? s.navBtnTxtCurrent : s.navBtnTxt}>
+            <div
+              className={
+                currentSection === 2 ? s.navBtnTxtCurrent : s.navBtnTxt
+              }
+            >
               Projects
             </div>
             <div className={s.navBtnTxtC}>Projects</div>
@@ -66,7 +129,11 @@ export default function Home() {
             className={s.navBtn}
             onClick={() => handleNavbarClick("experience")}
           >
-            <div className={false ? s.navBtnTxtCurrent : s.navBtnTxt}>
+            <div
+              className={
+                currentSection === 3 ? s.navBtnTxtCurrent : s.navBtnTxt
+              }
+            >
               Experience
             </div>
             <div className={s.navBtnTxtC}>Experience</div>
@@ -79,8 +146,11 @@ export default function Home() {
       </div>
 
       <div className={s.mainCont}>
-        <div className={s.projectSection2}>
-          <div /* Landing Page */ className={s.landing}>
+        <div
+          ref={(el) => (sectionRefs.current[0] = el)}
+          className={s.projectSection2}
+        >
+          <div className={s.landing}>
             <div className={s.name}> Fabian Lioner</div>
 
             <Typewriter
@@ -97,15 +167,24 @@ export default function Home() {
           </div>
         </div>
 
-        <div ref={aboutMeRef} className={s.projectSection}>
+        <div
+          ref={(el) => (sectionRefs.current[1] = el)}
+          className={s.projectSection}
+        >
           <AboutMe />
         </div>
 
-        <div ref={projectsRef} className={s.projectSection2}>
+        <div
+          ref={(el) => (sectionRefs.current[2] = el)}
+          className={s.projectSection2}
+        >
           <Projects />
         </div>
 
-        <div ref={experienceRef} className={s.projectSection}>
+        <div
+          ref={(el) => (sectionRefs.current[3] = el)}
+          className={s.projectSection}
+        >
           <Experience />
         </div>
       </div>
