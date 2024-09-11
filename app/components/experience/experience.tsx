@@ -31,7 +31,7 @@ export default function Experience() {
       src: "/icons/ml.png",
       nombre: "Software Developer",
       company: "Magic Lantern",
-      desc: "Firmware decompilation using Ghidra via a Linux VM to update function stubs.Injection of code to obtain the firmware signature.",
+      desc: "Firmware decompilation using Ghidra via a Linux VM to update function stubs. Code injection.",
       skills: "C, Linux, Qemu, ARM, Assembly ",
       initial: "Jan 2021",
       final: "Mar 2021",
