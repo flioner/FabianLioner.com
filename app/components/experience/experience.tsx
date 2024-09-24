@@ -9,7 +9,7 @@ export default function Experience() {
       src: "/icons/ITESM.png",
       nombre: "On Campus Intern",
       company: "Tec de Monterrey",
-      desc: "Maintaining and updating a PHP backend and drupal based websites. Refactoring, documenting and migrating internal tools to Next.js.",
+      desc: "Maintaining, refactoring, documenting and migrating internal tools to newer technologies.",
       skills: "React, PHP, Scrum, Docker",
       initial: "Aug 2023",
       final: "",
