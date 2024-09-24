@@ -155,8 +155,11 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={s.bgBlobColor}>
-        <MetaballsPage />
+      <div className={s.bgBlobColorCont}>
+        <div className={s.bgBlobColor}>
+          <div className={s.texture} />
+          <MetaballsPage />
+        </div>
       </div>
 
       <div className={s.mainCont}>

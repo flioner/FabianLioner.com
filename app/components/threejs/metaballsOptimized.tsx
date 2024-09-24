@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import * as Noise from "ts-perlin-simplex";
+import s from "./threejs.module.css";
 
 const MetaballsPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -109,7 +110,13 @@ const MetaballsPage = () => {
     };
   }, []);
 
-  return <div ref={containerRef} style={{ width: "100%", height: "160%" }} />;
+  return (
+    <div
+      className={s.texture}
+      ref={containerRef}
+      style={{ width: "100%", height: "100%" }}
+    />
+  );
 };
 
 export default MetaballsPage;
