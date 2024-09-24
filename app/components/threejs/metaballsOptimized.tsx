@@ -34,7 +34,7 @@ const MetaballsPage = () => {
 
     // Create a single blob
     const createBlob = () => {
-      const sphereGeometry = new THREE.SphereGeometry(1, 128, 128);
+      const sphereGeometry = new THREE.SphereGeometry(1, 96, 96);
       const material = new THREE.MeshNormalMaterial();
       const sphere = new THREE.Mesh(sphereGeometry, material);
 
