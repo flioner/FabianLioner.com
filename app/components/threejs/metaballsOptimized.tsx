@@ -9,7 +9,7 @@ const MetaballsPage = () => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null);
-
+  const frameRef = useRef<number>(0); // To store the frame reference
   const simplex = new Noise.SimplexNoise();
 
   useEffect(() => {
@@ -25,47 +25,44 @@ const MetaballsPage = () => {
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setClearColor(0x000000, 0); // Set background color to transparent
+    renderer.setClearColor(0x000000, 0); // Transparent background
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Set up Perlin noise
-    const simplex = new Noise.SimplexNoise();
+    // Reuse vector for positions update
+    const p = new THREE.Vector3();
 
-    // Create a single blob
+    // Create a single blob with lower resolution geometry (reduce segments)
     const createBlob = () => {
-      const sphereGeometry = new THREE.SphereGeometry(1, 96, 96);
+      const sphereGeometry = new THREE.SphereGeometry(1, 64, 64); // Lower geometry resolution
       const material = new THREE.MeshNormalMaterial();
       const sphere = new THREE.Mesh(sphereGeometry, material);
-
-      // Position the blob at the center of the scene
-      sphere.position.set(0, 0, 0);
-
       scene.add(sphere);
       return { sphere, noiseOffset: Math.random() * 100 };
     };
 
     const blob = createBlob();
 
-    const update = () => {
-      const time = performance.now() * 0.001; // Time for animation
-      const { sphere, noiseOffset } = blob;
-      const positions = (sphere.geometry as THREE.BufferGeometry).getAttribute(
-        "position"
-      ) as THREE.BufferAttribute;
+    // Reduce noise calculations frequency
+    const updateBlobGeometry = (
+      blob: { sphere: THREE.Mesh; noiseOffset: number },
+      time: number
+    ) => {
+      const positions = (
+        blob.sphere.geometry as THREE.BufferGeometry
+      ).getAttribute("position") as THREE.BufferAttribute;
+      const speed = 0.1;
+      const blobSize = 0.6;
 
       for (let i = 0; i < positions.count; i++) {
-        const p = new THREE.Vector3();
         p.fromBufferAttribute(positions, i);
-        const speed = 0.1;
-        const blobSize = 0.6;
         p.normalize().multiplyScalar(
           1 +
             0.3 *
               simplex.noise3d(
-                p.x * blobSize + time * speed + noiseOffset, // Add noise offset
-                p.y * blobSize + time * speed + noiseOffset, // Add noise offset
-                p.z * blobSize + time * speed + noiseOffset // Add noise offset
+                p.x * blobSize + time * speed + blob.noiseOffset,
+                p.y * blobSize + time * speed + blob.noiseOffset,
+                p.z * blobSize + time * speed + blob.noiseOffset
               )
         );
         positions.setXYZ(i, p.x, p.y, p.z);
@@ -73,14 +70,15 @@ const MetaballsPage = () => {
       positions.needsUpdate = true;
     };
 
+    // Animate with frame rate limiting
     const animate = () => {
-      requestAnimationFrame(animate);
-      update();
+      frameRef.current = requestAnimationFrame(animate);
+
+      const time = performance.now() * 0.001;
+      updateBlobGeometry(blob, time);
+
       if (rendererRef.current && sceneRef.current && cameraRef.current) {
-        const renderer = rendererRef.current;
-        const scene = sceneRef.current;
-        const camera = cameraRef.current;
-        renderer.render(scene, camera);
+        rendererRef.current.render(sceneRef.current, cameraRef.current);
       }
     };
     animate();
@@ -96,12 +94,20 @@ const MetaballsPage = () => {
       }
     };
 
-    handleResize();
+    // Debounce resize event
+    let resizeTimeout: NodeJS.Timeout | null = null;
+    const debouncedResize = () => {
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => handleResize(), 200);
+    };
 
-    window.addEventListener("resize", handleResize);
+    handleResize();
+    window.addEventListener("resize", debouncedResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", debouncedResize);
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
       if (rendererRef.current) {
         const renderer = rendererRef.current;
         container.removeChild(renderer.domElement);
