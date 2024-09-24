@@ -74,7 +74,7 @@ const MetaballsPage = () => {
     const animate = () => {
       frameRef.current = requestAnimationFrame(animate);
 
-      const time = performance.now() * 0.001;
+      const time = performance.now() * 0.0005;
       updateBlobGeometry(blob, time);
 
       if (rendererRef.current && sceneRef.current && cameraRef.current) {
