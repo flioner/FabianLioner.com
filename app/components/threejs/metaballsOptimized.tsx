@@ -18,8 +18,9 @@ const MetaballsPage = () => {
     const scene = new THREE.Scene();
     sceneRef.current = scene;
 
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(20, 1, 0.1, 1000);
     camera.position.z = 7;
+    camera.position.y = -0.5;
     cameraRef.current = camera;
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -108,7 +109,7 @@ const MetaballsPage = () => {
     };
   }, []);
 
-  return <div ref={containerRef} style={{ width: "100%", height: "100%" }} />;
+  return <div ref={containerRef} style={{ width: "100%", height: "160%" }} />;
 };
 
 export default MetaballsPage;
