@@ -84,7 +84,7 @@ export default function Home() {
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
-      const threshold = 30; // Set a threshold for trackpad scrolling
+      const threshold = 20; // Set a threshold for trackpad scrolling
 
       // Only handle scroll if deltaY exceeds a certain threshold
       if (Math.abs(event.deltaY) > threshold) {
