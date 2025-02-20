@@ -8,6 +8,8 @@ html {
   /* body won't work ¯\_(ツ)_/¯ */
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 :root {
