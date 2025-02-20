@@ -56,59 +56,6 @@ export default function Home() {
     }
   };
 
-  const handleScroll = (direction: string) => {
-    if (isScrolling.current) return;
-    isScrolling.current = true;
-
-    let nextSection = currentSection;
-    if (
-      direction === "down" &&
-      currentSection < sectionRefs.current.length - 1
-    ) {
-      nextSection += 1;
-    } else if (direction === "up" && currentSection > 0) {
-      nextSection -= 1;
-    }
-
-    const targetSection = sectionRefs.current[nextSection];
-    if (targetSection) {
-      targetSection.scrollIntoView({ behavior: "smooth" });
-    }
-
-    setTimeout(() => {
-      isScrolling.current = false; // Allow scrolling again after animation finishes
-    }, 800); // Time should match the scroll animation duration
-  };
-
-  // Listen to wheel event and trigger smooth scroll
-  useEffect(() => {
-    const handleWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      const threshold = 20; // Set a threshold for trackpad scrolling
-
-      // Only handle scroll if deltaY exceeds a certain threshold
-      if (Math.abs(event.deltaY) > threshold) {
-        const direction = event.deltaY > 0 ? "down" : "up";
-        handleScroll(direction);
-      }
-
-      // Clear previous timeout to debounce
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
-
-      scrollTimeout.current = setTimeout(() => {
-        isScrolling.current = false; // Reset scrolling state after inactivity
-      }, 200); // Reset after 200ms of no scroll events
-    };
-
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, [currentSection]);
-
   return (
     <main>
       <div className={s.responsiveness}>
