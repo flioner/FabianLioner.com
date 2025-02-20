@@ -16,6 +16,8 @@ html {
     scroll-snap-type: y mandatory;
   }
   body {
+    width: 100vw;
+    overflow-x: hidden;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
     color: black;
