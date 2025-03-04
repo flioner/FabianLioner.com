@@ -14,11 +14,12 @@ function MetaBall({ color, position, ...props }) {
   const meshRef = useRef();
   // Random phase and frequencies for varied motion
   const phase = useRef(Math.random() * Math.PI * 2);
+  const modifier = 0.5;
   const freq = useRef(
     new THREE.Vector3(
-      Math.random() * 1 + 0.5,
-      Math.random() * 1 + 0.5,
-      Math.random() * 1 + 0.5
+      Math.random() * 1 + modifier,
+      Math.random() * 1 + modifier,
+      Math.random() * 1 + modifier
     )
   );
   // Flag to skip the initial lerp transition
@@ -26,7 +27,7 @@ function MetaBall({ color, position, ...props }) {
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      const t = clock.getElapsedTime();
+      const t = clock.getElapsedTime() * 0.5; // Reduce speed (0.3 is an example)
       // Compute a per-axis oscillatory offset using random frequencies
       const offset = new THREE.Vector3(
         Math.sin(t * freq.current.x + phase.current) * 0.5,
@@ -41,7 +42,7 @@ function MetaBall({ color, position, ...props }) {
         initialized.current = true;
       } else {
         // Afterwards, smoothly interpolate toward the oscillatory target
-        meshRef.current.position.lerp(target, 0.005);
+        meshRef.current.position.lerp(target, 0.0035);
       }
     }
   });
