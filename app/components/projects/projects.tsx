@@ -3,9 +3,10 @@ import s from "./projects.module.css";
 import React, { useState, useEffect, useRef } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel } from "swiper/modules";
+import { Mousewheel, Pagination } from "swiper/modules";
 
 import "swiper/css";
+import "swiper/css/pagination";
 
 export default function Projects() {
   const projects = [
@@ -41,10 +42,11 @@ export default function Projects() {
         mousewheel={{ forceToAxis: true }} // Enable smooth scrolling
         slidesPerView={"auto"}
         centeredSlides
+        pagination={{ clickable: true }}
         loop
         initialSlide={2}
         autoHeight={false}
-        modules={[Mousewheel]}
+        modules={[Mousewheel, Pagination]}
       >
         {projects.map((project, index) => (
           <SwiperSlide className={s.slide} key={index}>

@@ -16,7 +16,7 @@
 
 .slide {
   position: relative;
-  width: 90%;
+  width: 90% !important;
   max-width: 1400px;
   height: auto;
   padding-top: 20px;
@@ -24,7 +24,6 @@
 }
 
 .projectCont {
-  margin: 0px 20px;
   user-select: none;
   scroll-snap-align: start;
   flex-shrink: 0;
@@ -47,10 +46,11 @@
   @media (max-width: 850px) {
     justify-content: space-between;
     height: 100%;
+    margin: 0px 10px;
   }
   @media (min-width: 850px) {
     justify-content: space-between;
-
+    margin: 0px 20px;
     align-items: center;
   }
 }
