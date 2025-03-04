@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useRef } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -12,7 +10,6 @@ import {
 
 function MetaBall({ color, position, ...props }) {
   const meshRef = useRef();
-  // Random phase and frequencies for varied motion
   const phase = useRef(Math.random() * Math.PI * 2);
   const modifier = 0.5;
   const freq = useRef(
@@ -22,27 +19,34 @@ function MetaBall({ color, position, ...props }) {
       Math.random() * 1 + modifier
     )
   );
-  // Flag to skip the initial lerp transition
   const initialized = useRef(false);
 
+  // Store time from last frame
+  const lastFrameTime = useRef(0);
+  const targetFPS = 30;
+  const frameInterval = 1 / targetFPS; // Time interval per frame for 30 FPS
+
   useFrame(({ clock }) => {
-    if (meshRef.current) {
-      const t = clock.getElapsedTime() * 0.5; // Reduce speed (0.3 is an example)
-      // Compute a per-axis oscillatory offset using random frequencies
-      const offset = new THREE.Vector3(
-        Math.sin(t * freq.current.x + phase.current) * 0.5,
-        Math.cos(t * freq.current.y + phase.current) * 0.5,
-        Math.sin(t * freq.current.z + phase.current) * 0.15
-      );
-      // Calculate the target position: center plus the oscillation offset
-      const target = new THREE.Vector3(0, 0, 0).add(offset);
-      if (!initialized.current) {
-        // On the first frame, set the position directly to avoid a transition
-        meshRef.current.position.copy(target);
-        initialized.current = true;
-      } else {
-        // Afterwards, smoothly interpolate toward the oscillatory target
-        meshRef.current.position.lerp(target, 0.0035);
+    const currentTime = clock.getElapsedTime();
+    // Check if enough time has passed to update the frame (to limit FPS)
+    if (currentTime - lastFrameTime.current >= frameInterval) {
+      lastFrameTime.current = currentTime; // Update the last frame time
+
+      if (meshRef.current) {
+        const t = clock.getElapsedTime() * 0.7;
+        const intensity = 0.7;
+        const offset = new THREE.Vector3(
+          Math.sin(t * freq.current.x + phase.current) * intensity,
+          Math.cos(t * freq.current.y + phase.current) * intensity,
+          Math.sin(t * freq.current.z + phase.current) * intensity
+        );
+        const target = new THREE.Vector3(0, 0, 0).add(offset);
+        if (!initialized.current) {
+          meshRef.current.position.copy(target);
+          initialized.current = true;
+        } else {
+          meshRef.current.position.lerp(target, 0.0035);
+        }
       }
     }
   });
