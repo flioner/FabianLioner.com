@@ -4,7 +4,7 @@ import * as THREE from "three";
 import * as Noise from "ts-perlin-simplex";
 import s from "./threejs.module.css";
 
-const MetaballsPage = () => {
+const MetaballsPage = ({ paused }: { paused: boolean }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -75,7 +75,9 @@ const MetaballsPage = () => {
       frameRef.current = requestAnimationFrame(animate);
 
       const time = performance.now() * 0.0005;
-      updateBlobGeometry(blob, time);
+      if (!paused) {
+        updateBlobGeometry(blob, time); // Only update geometry if not paused
+      }
 
       if (rendererRef.current && sceneRef.current && cameraRef.current) {
         rendererRef.current.render(sceneRef.current, cameraRef.current);
@@ -114,7 +116,7 @@ const MetaballsPage = () => {
         renderer.dispose();
       }
     };
-  }, []);
+  }, [paused]); // Add paused as a dependency to rerun the effect when it changes
 
   return (
     <div

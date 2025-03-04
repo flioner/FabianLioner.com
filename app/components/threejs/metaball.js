@@ -1,3 +1,4 @@
+"use client";
 import React, { useRef } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -8,7 +9,7 @@ import {
   Bounds,
 } from "@react-three/drei";
 
-function MetaBall({ color, position, ...props }) {
+function MetaBall({ color, position, paused, ...props }) {
   const meshRef = useRef();
   const phase = useRef(Math.random() * Math.PI * 2);
   const modifier = 0.5;
@@ -27,6 +28,8 @@ function MetaBall({ color, position, ...props }) {
   const frameInterval = 1 / targetFPS; // Time interval per frame for 30 FPS
 
   useFrame(({ clock }) => {
+    if (paused) return; // Skip frame updates if paused
+
     const currentTime = clock.getElapsedTime();
     // Check if enough time has passed to update the frame (to limit FPS)
     if (currentTime - lastFrameTime.current >= frameInterval) {
@@ -58,7 +61,7 @@ function MetaBall({ color, position, ...props }) {
   );
 }
 
-export default function MetaballsPage() {
+export default function MetaballsPage({ paused }) {
   return (
     <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 0.5], fov: 5 }}>
       <color attach="background" args={["#ffffff"]} />
@@ -70,12 +73,12 @@ export default function MetaballsPage() {
         enableColors
       >
         <meshStandardMaterial vertexColors thickness={0.15} roughness={0.2} />
-        <MetaBall color="blue" position={[0, 0, 0.1]} />
-        <MetaBall color="skyblue" position={[0.25, 0, 0]} />
-        <MetaBall color="aqua" position={[0, 0.25, 0]} />
-        <MetaBall color="purple" position={[0, 0.25, 0]} />
-        <MetaBall color="hotpink" position={[0.25, 0.25, 0]} />
-        <MetaBall color="pink" position={[-0.1, -0.1, 0.01]} />
+        <MetaBall color="blue" position={[0, 0, 0.1]} paused={paused} />
+        <MetaBall color="skyblue" position={[0.25, 0, 0]} paused={paused} />
+        <MetaBall color="aqua" position={[0, 0.25, 0]} paused={paused} />
+        <MetaBall color="purple" position={[0, 0.25, 0]} paused={paused} />
+        <MetaBall color="hotpink" position={[0.25, 0.25, 0]} paused={paused} />
+        <MetaBall color="pink" position={[-0.1, -0.1, 0.01]} paused={paused} />
       </MarchingCubes>
       <Environment
         intensity={0.5}
