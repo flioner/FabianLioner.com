@@ -79,6 +79,33 @@
   height: 160vh;
   background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E");
 }
+/* New Blob Experimental */
+
+.bgBlobColorN {
+  position: absolute;
+  width: 200vw;
+  margin: auto;
+  height: 180vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: -40vh;
+  background-color: white;
+  @media (max-width: 700px) {
+    width: 300vw;
+  }
+}
+
+.textureN {
+  position: absolute;
+  mix-blend-mode: color-burn; /* Overlay, soft-light, color-burn ,*/
+  width: 100vw;
+  height: 180vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: -20vh;
+  z-index: 99 !important;
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E");
+}
 
 .bgImg {
   position: absolute;

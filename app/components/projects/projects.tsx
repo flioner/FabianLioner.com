@@ -3,6 +3,8 @@ import s from "./projects.module.css";
 import React, { useState, useEffect, useRef } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel } from "swiper/modules";
+
 import "swiper/css";
 
 export default function Projects() {
@@ -36,11 +38,13 @@ export default function Projects() {
       <Swiper
         className={s.slider}
         direction={"horizontal"}
+        mousewheel={{ forceToAxis: true }} // Enable smooth scrolling
         slidesPerView={"auto"}
         centeredSlides
         loop
         initialSlide={2}
         autoHeight={false}
+        modules={[Mousewheel]}
       >
         {projects.map((project, index) => (
           <SwiperSlide className={s.slide} key={index}>
