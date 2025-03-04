@@ -5,7 +5,7 @@ import Typewriter from "typewriter-effect";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Experience from "./components/experience/experience";
-import MetaballsPage from "./components/threejs/metaball";
+import MetaballsPage from "./components/threejs/metaballsOptimized";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(0);
@@ -58,9 +58,6 @@ export default function Home() {
 
   return (
     <main>
-      <div className={s.metaBalls}>
-        <MetaballsPage />
-      </div>
       <div className={s.responsiveness}>
         <div className={!isMobile ? s.navbar : s.hidden}>
           <div
@@ -108,6 +105,7 @@ export default function Home() {
       <div className={s.bgBlobColorCont}>
         <div className={s.bgBlobColor}>
           <div className={s.texture} />
+          <MetaballsPage />
         </div>
       </div>
 
