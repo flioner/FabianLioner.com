@@ -18,11 +18,26 @@ export default function Projects() {
       link: "https://menu.fabianlioner.com",
     },
     {
+      name: "Tec de Monterrey Scolarships",
+      description: "Nationwide used tool for awarding scholarships.",
+      technologies: ["Prisma", "Typescript", "Scrum", "Jira"],
+      company: "Becas",
+      link: "https://www.linkedin.com/in/fabianlioner/details/projects/",
+    },
+    {
       name: "Oracle Java Bot",
       description: "Fully Cloud Native Agile task management app",
       technologies: ["Next.js", "Typescript", "Springboot", "OracleCloud"],
       company: "Oracle",
       link: "https://youtu.be/3tbhMIe6msg?si=A4Ro4MlplAYvRSKu",
+    },
+    {
+      name: "Myotube Identification AI Model",
+      description:
+        " Machine learning model for the identification of myotubes in lab samples",
+      technologies: ["Vite", "LabelStudio", "AI", "FastAPI"],
+      company: "Myotubes",
+      link: "https://github.com/flioner/TC3007C/blob/main/MyotubeSegregationProject.pdf",
     },
     {
       name: "BAMX Cold Chain App",
