@@ -66,7 +66,7 @@
 }
 
 .bgBlobColor {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 160vh;
   background-color: white;
