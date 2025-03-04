@@ -51,7 +51,7 @@ export default function Projects() {
                   <p className={s.desc}>{project.description}</p>
                   <div id="parent" className={s.technologies}>
                     {project.technologies.map((tech) => (
-                      <div key={index} className={s.tech}>
+                      <div key={tech} className={s.tech}>
                         {tech}
                       </div>
                     ))}
