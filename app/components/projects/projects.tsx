@@ -73,7 +73,7 @@ export default function Projects() {
                 <img
                   draggable="false"
                   className={s.img}
-                  src={"/photos/projects/" + project.company + ".png"}
+                  src={"/photos/projects/" + project.company + ".webp"}
                   alt={project.company + " logo"}
                 />
               </div>
