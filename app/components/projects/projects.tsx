@@ -21,7 +21,7 @@ export default function Projects() {
       name: "Tec de Monterrey Scolarships",
       description: "Nationwide used tool for awarding scholarships.",
       technologies: ["Prisma", "Typescript", "Scrum", "Jira"],
-      company: "Becas",
+      company: "becas",
       link: "https://www.linkedin.com/in/fabianlioner/details/projects/",
     },
     {
