@@ -58,6 +58,9 @@ export default function Home() {
 
   return (
     <main>
+      <div className={s.metaBalls}>
+        <MetaballsPage />
+      </div>
       <div className={s.responsiveness}>
         <div className={!isMobile ? s.navbar : s.hidden}>
           <div
@@ -105,7 +108,6 @@ export default function Home() {
       <div className={s.bgBlobColorCont}>
         <div className={s.bgBlobColor}>
           <div className={s.texture} />
-          <MetaballsPage />
         </div>
       </div>
 
