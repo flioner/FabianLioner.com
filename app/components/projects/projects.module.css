@@ -115,14 +115,17 @@
 
 .technologies {
   flex-wrap: wrap;
+  display: flex;
 }
 
 .tech {
+  width: fit-content;
   padding: 7px 10px;
   border-radius: calc(var(--radius) - 4px);
   margin-right: 6px;
   margin-bottom: 5px;
   color: white;
+  background-color: #6d99e5;
 }
 
 .urlCont {
