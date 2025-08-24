@@ -5,7 +5,7 @@ import Typewriter from "typewriter-effect";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Experience from "./components/experience/experience";
-import MetaballsPage from "./components/threejs/metaballsOptimized";
+import MetaballsPage from "./components/threejs/metaballsHardOptimized";
 import Education from "./components/education/education";
 import Mouse from "./components/mouse/mouse";
 
@@ -129,7 +129,9 @@ export default function Home() {
       <div className={s.bgBlobColorCont}>
         <div className={s.bgBlobColor}>
           <div className={s.texture} />
-          <MetaballsPage />
+          <MetaballsPage
+            paused={currentSection === 0 || currentSection === 1 ? false : true}
+          />
         </div>
       </div>
 
