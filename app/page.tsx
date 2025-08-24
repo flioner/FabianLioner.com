@@ -149,8 +149,8 @@ export default function Home() {
               options={{
                 strings: [
                   "Front-End Development",
-                  "Web Design",
-                  "Full-Stack Development",
+                  "System Administration",
+                  "Applied Innovation",
                 ],
                 autoStart: true,
                 loop: true,
