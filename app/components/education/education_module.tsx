@@ -54,7 +54,7 @@ const Experiencia: React.FC<ExperienciaProps> = ({ experiencia }) => {
               experienceRefs.current[index] = el;
             }}
           >
-            <div className={s.eImgSCont}>
+            <div className={src == "/icons/ai.svg" ? s.eImgCont : s.eImgSCont}>
               <img className={s.eImgS} src={src} alt={`${nombre} image`} />
             </div>
 

@@ -3,7 +3,7 @@ import s from "./projects.module.css";
 import React, { useState, useEffect, useRef } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel, Pagination } from "swiper/modules";
+import { Mousewheel, Pagination } from "swiper";
 
 import "swiper/css";
 import "swiper/css/pagination";

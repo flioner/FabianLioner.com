@@ -126,6 +126,16 @@
   color: var(--darkgrey);
   transition: 0.3s;
 }
+.eImgCont {
+  width: 15% !important;
+  height: 100%;
+  padding: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: max(min(1.5vw, 30px), 15px);
+}
 
 .eImgSCont {
   width: 15% !important;
@@ -139,7 +149,7 @@
 
 .eImgS {
   position: relative;
-
+  border-radius: 50%;
   max-height: 100%;
   transition: 0.3s;
 }

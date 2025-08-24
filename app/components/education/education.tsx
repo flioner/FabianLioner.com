@@ -6,7 +6,7 @@ import s from "./education.module.css";
 export default function Education() {
   const experiencia = [
     {
-      src: "/icons/ITESM.png",
+      src: "/icons/posgrados.png",
       nombre: "Master in Engineering Management",
       company: "Tec de Monterrey",
       desc: "To develop ethically oriented leaders capable of planning and executing engineering projects  through leadership skills",
@@ -17,7 +17,7 @@ export default function Education() {
       url: "https://maestriasydiplomados.tec.mx/posgrados/maestria-en-gestion-de-la-ingenieria?locale=en",
     },
     {
-      src: "/icons/ITESM.png",
+      src: "/icons/ai.svg",
       nombre:
         "Advanced Artificial Intelligence for Data Science (Professional Concentration)",
       company: "Tec de Monterrey",
