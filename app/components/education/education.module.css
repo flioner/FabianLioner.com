@@ -1,0 +1,215 @@
+.mainCont {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.innerCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  height: 75vh;
+}
+
+.experienciaOuterCont {
+  position: relative;
+  width: 100%;
+  max-height: calc(100% - 50px) !important;
+
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skillsOuterCont {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* Experiencia */
+
+.eCont {
+  display: flex;
+  position: relative;
+  max-height: calc(33% - 10px) !important;
+  align-items: center;
+  width: calc(90% + 10px);
+  max-width: 1400px;
+  padding: max(min(1.5vw, 30px), 20px);
+
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E"),
+    linear-gradient(
+      -30deg,
+      rgba(210, 210, 210, 1) 0%,
+      rgba(244, 244, 244, 1) 100%
+    );
+  background-blend-mode: overlay;
+  background-size: cover;
+  border-radius: max(min(1vw, 10px), 7px);
+  animation: fadeIn 1s ease-in-out both;
+  transition: 0.4s;
+}
+
+.eCont:hover {
+  @media (min-width: 0px) {
+    scale: 1.075;
+  }
+  @media (min-width: 1000px) {
+    scale: 1.1;
+  }
+  @media (min-width: 1470px) {
+    scale: 1.15;
+  }
+
+  transition: 0.3s;
+}
+
+.eTxtContS {
+  height: 100%;
+  max-height: 200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.eTitleS {
+  font-size: var(--S);
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.eCompanyDual {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.eCompanyS {
+  width: fit-content;
+  font-size: var(--XS);
+  font-weight: 500;
+  color: var(--darkergrey);
+  transition: 0.3s;
+}
+
+.eCompanyS:hover {
+  font-weight: 500;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.eDescS {
+  font-size: var(--XXXS);
+  transition: 0.3s;
+}
+
+.eDateS {
+  font-size: var(--XXXS);
+  font-weight: 500;
+  color: var(--darkgrey);
+  transition: 0.3s;
+}
+.eSkillsS {
+  font-size: var(--XXXS);
+  font-style: italic;
+  color: var(--darkgrey);
+  transition: 0.3s;
+}
+
+.eImgSCont {
+  width: 15% !important;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: max(min(1.5vw, 30px), 15px);
+}
+
+.eImgS {
+  position: relative;
+
+  max-height: 100%;
+  transition: 0.3s;
+}
+
+/* Skills */
+.skillCont {
+  margin-top: 10px;
+  max-width: 1420px;
+  display: flex;
+  flex-wrap: wrap;
+  @media (max-width: 1300px) {
+    width: calc(90% + 20px);
+  }
+  @media (min-width: 1300px) {
+    width: calc(90% + 30px);
+    margin-bottom: 30px;
+  }
+}
+
+.skill {
+  flex: 1;
+  min-width: 100px;
+  min-height: 40px;
+  border-radius: max(min(1vw, 10px), 7px);
+  @media (max-width: 1300px) {
+    margin: 5px;
+  }
+  @media (min-width: 1300px) {
+    margin: 8px;
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E"),
+    linear-gradient(
+      -30deg,
+      rgba(210, 210, 210, 1) 0%,
+      rgba(244, 244, 244, 1) 100%
+    );
+  background-blend-mode: overlay;
+  background-size: cover;
+  transition: 0.3s;
+  font-size: var(--XXS);
+  font-weight: 500;
+  color: var(--darkgrey);
+  animation: fadeIn 1s both;
+}
+
+.skill:hover {
+  scale: 1.1;
+  transition: 0.3s;
+}
+
+.skillY {
+  background-color: var(--lightestgrey);
+  padding: 2px 6px;
+  margin-left: 7px;
+  border-radius: 5px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0%;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 100%;
+    transform: translateY(0px);
+  }
+}

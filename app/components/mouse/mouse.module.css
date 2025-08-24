@@ -1,0 +1,34 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: visible; /* let cursor leave the screen */
+  background-color: white;
+  z-index: -2;
+}
+
+.cursor {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    rgb(0, 140, 255, 0.05),
+    rgb(255, 0, 191, 0.05)
+  );
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  filter: blur(100px);
+}
+
+.texture {
+  position: absolute;
+  mix-blend-mode: color-burn; /* Overlay, soft-light, color-burn ,*/
+  width: 100vw;
+  height: 160vh;
+  background: url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20400%20400%27%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%3E%3Cfilter%20id%3D%27noiseFilter%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%277.66%27%20numOctaves%3D%275%27%20stitchTiles%3D%27stitch%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23noiseFilter)%27/%3E%3C/svg%3E");
+}
