@@ -17,7 +17,7 @@ export default function Education() {
       url: "https://maestriasydiplomados.tec.mx/posgrados/maestria-en-gestion-de-la-ingenieria?locale=en",
     },
     {
-      src: "/icons/ai.svg",
+      src: "/icons/AI.svg",
       nombre:
         "Advanced Artificial Intelligence for Data Science (Professional Concentration)",
       company: "Tec de Monterrey",
