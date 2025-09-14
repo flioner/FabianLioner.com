@@ -5,12 +5,22 @@ import Typewriter from "typewriter-effect";
 import Projects from "./components/projects/projects";
 import AboutMe from "./components/aboutme/aboutme";
 import Experience from "./components/experience/experience";
-import MetaballsPage from "./components/threejs/metaballsOptimized";
+import MetaballsPage from "./components/threejs/metaballsHardOptimized";
+import Education from "./components/education/education";
+import Mouse from "./components/mouse/mouse";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState(0);
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]); // Array of section refs
-  const sections = ["landing", "aboutme", "projects", "experience"];
+  const isScrolling = useRef(false); // Used to debounce the scroll behavior
+  const sections = [
+    "landing",
+    "aboutme",
+    "experience",
+    "projects",
+    "education",
+  ];
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null); // Timeout reference for debouncing
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
@@ -71,31 +81,47 @@ export default function Home() {
             </div>
             <div className={s.navBtnTxtC}>About Me</div>
           </div>
-          <div
-            className={s.navBtn}
-            onClick={() => handleNavbarClick("projects")}
-          >
-            <div
-              className={
-                currentSection === 2 ? s.navBtnTxtCurrent : s.navBtnTxt
-              }
-            >
-              Projects
-            </div>
-            <div className={s.navBtnTxtC}>Projects</div>
-          </div>
+
           <div
             className={s.navBtn}
             onClick={() => handleNavbarClick("experience")}
           >
             <div
               className={
-                currentSection === 3 ? s.navBtnTxtCurrent : s.navBtnTxt
+                currentSection === 2 ? s.navBtnTxtCurrent : s.navBtnTxt
               }
             >
               Experience
             </div>
             <div className={s.navBtnTxtC}>Experience</div>
+          </div>
+
+          <div
+            className={s.navBtn}
+            onClick={() => handleNavbarClick("projects")}
+          >
+            <div
+              className={
+                currentSection === 3 ? s.navBtnTxtCurrent : s.navBtnTxt
+              }
+            >
+              Projects
+            </div>
+            <div className={s.navBtnTxtC}>Projects</div>
+          </div>
+
+          <div
+            className={s.navBtn}
+            onClick={() => handleNavbarClick("education")}
+          >
+            <div
+              className={
+                currentSection === 4 ? s.navBtnTxtCurrent : s.navBtnTxt
+              }
+            >
+              Education
+            </div>
+            <div className={s.navBtnTxtC}>Education</div>
           </div>
         </div>
       </div>
@@ -123,8 +149,8 @@ export default function Home() {
               options={{
                 strings: [
                   "Front-End Development",
-                  "Web Design",
-                  "Full-Stack Development",
+                  "System Administration",
+                  "Applied Innovation",
                 ],
                 autoStart: true,
                 loop: true,
@@ -146,6 +172,15 @@ export default function Home() {
           ref={(el) => {
             sectionRefs.current[2] = el;
           }}
+          className={s.projectSection}
+        >
+          <Experience />
+        </div>
+
+        <div
+          ref={(el) => {
+            sectionRefs.current[3] = el;
+          }}
           className={s.projectSection2}
         >
           <Projects />
@@ -153,13 +188,14 @@ export default function Home() {
 
         <div
           ref={(el) => {
-            sectionRefs.current[3] = el;
+            sectionRefs.current[4] = el;
           }}
-          className={s.projectSection}
+          className={s.projectSection2}
         >
-          <Experience />
+          <Education />
         </div>
       </div>
+      <Mouse />
     </main>
   );
 }
